@@ -1,18 +1,4 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue';
-import { RouterLink, RouterView } from 'vue-router';
-import { useStore } from 'vuex';
-import { ref } from 'vue';
-
-const teste = ref('sada');
-
-const store = useStore();
-console.log(store.state.loading);
-store.dispatch('loadingChange', true);
-console.log(store.state.loading);
-</script>
-
-<!-- <script>
+<script>
 import HelloWorld from './components/HelloWorld.vue';
 export default {
   name: 'App',
@@ -21,7 +7,7 @@ export default {
     teste: 'msg Teste',
   }),
 };
-</script> -->
+</script>
 
 <template>
   <header>
