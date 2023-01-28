@@ -1,13 +1,20 @@
 <template>
   <h1>Registrar</h1>
-  <span>Por favor preencha os dados abaixo para criar uma nova conta.</span>
-  <input type="text" placeholder="NOME" />
-  <input type="text" placeholder="EMAIL" />
-  <input type="password" placeholder="SENHA" />
-  <input type="password" placeholder="REDIGITE A SENHA" />
+  <p>Por favor preencha os dados abaixo para criar uma nova conta.</p>
+  <InputComponent label="Nome" v-model="nome" />
+  <InputComponent label="E-mail" v-model="email" />
+  <InputComponent label="Senha" v-model="senha" type="password" />
+  <InputComponent label="Redigite a senha" v-model="senha2" type="password" />
   <button>Criar</button>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
+
+const nome = ref('');
+const email = ref('');
+const senha = ref('');
+const senha2 = ref('');
+</script>
 
 <style lang="less" scoped />
