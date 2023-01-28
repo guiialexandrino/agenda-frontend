@@ -39,6 +39,8 @@ function handleClick() {
   translateXEffect(route.name);
 }
 
+console.log(window, 'aqui');
+
 /*Referente a animação */
 const wrapper = ref(null);
 const left = ref(null);
@@ -49,7 +51,13 @@ const logo = ref(null);
 function translateXEffect(route) {
   if (route === 'Login') {
     logo.value.style.animation = 'fadeOut 0.5s';
-    wrapper.value.style.backgroundColor = 'blue';
+    wrapper.value.style.backgroundColor = 'red';
+    wrapper.value.style.backgroundImage = `url('../src/assets/images/Background2.png')`;
+    logo.value.style.backgroundImage = `url('../src/assets/images/Logo2.png')`;
+    window.document.documentElement.style.setProperty(
+      '--primary-color',
+      'rgba(210,77,92,1)'
+    );
     setTimeout(() => {
       left.value.style.transform = 'translateX(100%)';
       right.value.style.transform = 'translateX(-100%)';
@@ -64,6 +72,12 @@ function translateXEffect(route) {
   } else {
     logo.value.style.animation = 'fadeOut 0.5s';
     wrapper.value.style.backgroundColor = 'transparent';
+    wrapper.value.style.backgroundImage = `url('../src/assets/images/Background.png')`;
+    logo.value.style.backgroundImage = `url('../src/assets/images/Logo.png')`;
+    window.document.documentElement.style.setProperty(
+      '--primary-color',
+      'rgba(51, 41, 161, 1)'
+    );
     setTimeout(() => {
       left.value.style.transform = 'translateX(0%)';
       right.value.style.transform = 'translateX(0%)';
