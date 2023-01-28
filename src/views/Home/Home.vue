@@ -51,9 +51,8 @@ const logo = ref(null);
 function translateXEffect(route) {
   if (route === 'Login') {
     logo.value.style.animation = 'fadeOut 0.5s';
-    wrapper.value.style.backgroundColor = 'red';
-    wrapper.value.style.backgroundImage = `url('../src/assets/images/Background2.png')`;
-    logo.value.style.backgroundImage = `url('../src/assets/images/Logo2.png')`;
+    logo.value.classList.add('changeLogo');
+    wrapper.value.classList.add('changeBackground');
     window.document.documentElement.style.setProperty(
       '--primary-color',
       'rgba(210,77,92,1)'
@@ -71,9 +70,8 @@ function translateXEffect(route) {
     }, 1000);
   } else {
     logo.value.style.animation = 'fadeOut 0.5s';
-    wrapper.value.style.backgroundColor = 'transparent';
-    wrapper.value.style.backgroundImage = `url('../src/assets/images/Background.png')`;
-    logo.value.style.backgroundImage = `url('../src/assets/images/Logo.png')`;
+    logo.value.classList.remove('changeLogo');
+    wrapper.value.classList.remove('changeBackground');
     window.document.documentElement.style.setProperty(
       '--primary-color',
       'rgba(51, 41, 161, 1)'

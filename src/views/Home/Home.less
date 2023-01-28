@@ -5,11 +5,17 @@
   justify-content: center;
   max-width: 100%;
   height: 100vh;
-  background-image: url('../src/assets/images/Background.png');
+  background-color: transparent;
+  background-image: url('../../assets/images/Background.png');
   opacity: 1;
   background-position-y: 20%;
   background-size: cover;
   transition: all 300ms;
+}
+
+.changeBackground {
+  background-image: url('../../assets/images/Background2.png') !important;
+  background-color: red !important;
 }
 
 .leftSide {
@@ -78,6 +84,10 @@
     transition: transform 500ms;
     animation: fadeIn 0.5s;
   }
+}
+
+.changeLogo {
+  background-image: url('../../assets/images/Logo2.png') !important;
 }
 
 @media (max-width: 1368px) {
