@@ -29,6 +29,7 @@ p {
 
 body {
   color: var(--text-color);
+  font-size: 1.2rem;
   font-family: 'quicksand', Arial, Helvetica, sans-serif;
 }
 
@@ -36,4 +37,33 @@ h1,
 h2,
 h3 {
   font-family: 'montserrat-bold', Arial, Helvetica, sans-serif;
+}
+
+a {
+  cursor: pointer;
+}
+
+input {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+}
+
+// Efeitos
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

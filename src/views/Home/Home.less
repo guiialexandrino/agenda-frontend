@@ -1,0 +1,91 @@
+.wrapperLogin {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  height: 100vh;
+  background-image: url('../src/assets/images/Background.png');
+  opacity: 1;
+  background-position-y: 20%;
+  background-size: cover;
+  transition: all 300ms;
+}
+
+.leftSide {
+  position: absolute;
+  left: 0px;
+  right: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100vh;
+  background-color: white;
+  opacity: 0.85;
+  box-shadow: 0px 0px 30px 5px rgba(0, 0, 0, 0.35);
+  transform: translateX(0px);
+  transition: transform 500ms;
+
+  .content {
+    display: block;
+    width: 55%;
+
+    h1 {
+      font-size: 3rem;
+      color: var(--primary-color);
+    }
+  }
+}
+
+.rightSide {
+  display: flex;
+  position: absolute;
+  left: none;
+  right: 0px;
+  width: 50%;
+  height: 100vh;
+  transform: translateX(0px);
+  transition: transform 500ms;
+
+  .rightSide-1 {
+    cursor: pointer;
+    user-select: none;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: white;
+    width: 365px;
+    height: 105px;
+    background-color: var(--primary-color);
+    bottom: 0px;
+    left: 0px;
+    transform: translateX(0px);
+    transition: transform 500ms;
+  }
+
+  .rightSide-2 {
+    position: absolute;
+    right: 0px;
+    width: 251px;
+    height: 93px;
+    background-image: url('../../assets/images/Logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: translateX(0px);
+    transition: transform 500ms;
+    animation: fadeIn 0.5s;
+  }
+}
+
+@media (max-width: 1368px) {
+  .leftSide {
+    width: 100%;
+  }
+
+  .rightSide {
+    display: none;
+  }
+}
