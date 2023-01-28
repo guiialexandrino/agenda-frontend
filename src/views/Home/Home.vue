@@ -21,32 +21,31 @@ import { useRoute, useRouter } from 'vue-router';
 const router = useRouter();
 const route = useRoute();
 
-const initialLabel = route.name === 'Login' ? 'Registre-se!' : 'Login';
-const label = ref(initialLabel);
+const getLabel = route.name === 'Login' ? 'Registre-se!' : 'Login';
+const label = ref(getLabel);
 
 const actualRoute = computed(() => route.name);
 watch(actualRoute, (page) => {
-  if (page === 'Login') label.value = 'Registre-se!';
-  if (page === 'Register') label.value = 'Login';
-  if (page === 'Forgot Password') label.value = 'Login';
+  if (page === 'Login') {
+    label.value = 'Registre-se!';
+  }
+  if (page === 'Register') {
+    label.value = 'Login';
+  }
+  if (page === 'Forgot Password') {
+    label.value = 'Login';
+  }
+  translateXEffect(route.name);
+});
+
+onMounted(() => {
+  translateXEffect(route.name);
 });
 
 function handleClick() {
-  let destiny = '';
-  if (route.name === 'Login') {
-    router.push({ name: 'Register' });
-    destiny = 'Register';
-  }
-  if (route.name === 'Register') {
-    router.push({ name: 'Login' });
-    destiny = 'Login';
-  }
-  if (route.name === 'Forgot Password') {
-    router.push({ name: 'Login' });
-    destiny = 'Login';
-  }
-  logo.value.style.animation = 'fadeOut 0.5s';
-  translateXEffect(destiny);
+  if (route.name === 'Login') router.push({ name: 'Register' });
+  if (route.name === 'Register') router.push({ name: 'Login' });
+  if (route.name === 'Forgot Password') router.push({ name: 'Login' });
 }
 
 /*Referente a animação */
@@ -97,10 +96,6 @@ function translateXEffect(route) {
     }, 1000);
   }
 }
-
-onMounted(() => {
-  translateXEffect(route.name);
-});
 </script>
 
 <style lang="less" src="./Home.less" />
