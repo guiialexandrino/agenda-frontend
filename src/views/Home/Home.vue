@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { ref, watch, computed } from 'vue';
+import { ref, watch, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -32,14 +32,22 @@ watch(actualRoute, (page) => {
 });
 
 function handleClick() {
-  if (route.name === 'Login') router.push({ name: 'Register' });
-  if (route.name === 'Register') router.push({ name: 'Login' });
-  if (route.name === 'Forgot Password') router.push({ name: 'Login' });
+  let destiny = '';
+  if (route.name === 'Login') {
+    router.push({ name: 'Register' });
+    destiny = 'Register';
+  }
+  if (route.name === 'Register') {
+    router.push({ name: 'Login' });
+    destiny = 'Login';
+  }
+  if (route.name === 'Forgot Password') {
+    router.push({ name: 'Login' });
+    destiny = 'Login';
+  }
   logo.value.style.animation = 'fadeOut 0.5s';
-  translateXEffect(route.name);
+  translateXEffect(destiny);
 }
-
-console.log(window, 'aqui');
 
 /*Referente a animação */
 const wrapper = ref(null);
@@ -49,7 +57,7 @@ const confirmButton = ref(null);
 const logo = ref(null);
 
 function translateXEffect(route) {
-  if (route === 'Login') {
+  if (route === 'Register') {
     logo.value.style.animation = 'fadeOut 0.5s';
     logo.value.classList.add('changeLogo');
     wrapper.value.classList.add('changeBackground');
@@ -89,6 +97,10 @@ function translateXEffect(route) {
     }, 1000);
   }
 }
+
+onMounted(() => {
+  translateXEffect(route.name);
+});
 </script>
 
 <style lang="less" src="./Home.less" />
