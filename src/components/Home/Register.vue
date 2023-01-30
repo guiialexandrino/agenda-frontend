@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Registrar</h1>
+    <h1 class="verticalTop">Registrar</h1>
     <p>Por favor preencha os dados abaixo para criar uma nova conta.</p>
     <InputComponent label="Nome" v-model="nome" />
     <InputComponent label="E-mail" v-model="email" />
@@ -21,5 +21,3 @@ const email = ref('');
 const senha = ref('');
 const senha2 = ref('');
 </script>
-
-<style lang="less" scoped />

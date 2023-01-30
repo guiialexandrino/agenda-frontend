@@ -1,6 +1,7 @@
 :root {
   --primary-color: rgba(51, 41, 161, 1);
   --text-color: rgba(65, 65, 65, 1);
+  --login-height: 100vh;
 }
 
 @font-face {
@@ -26,6 +27,17 @@ h3 {
   margin: 0px;
 }
 
+body {
+  background-color: transparent;
+  // background-position-y: 50px;
+  background-size: cover;
+  z-index: -40;
+}
+
+.addBackground {
+  background-image: url('../src/assets/images/Background.png');
+}
+
 body,
 input {
   color: var(--text-color);
@@ -42,6 +54,7 @@ h3 {
 a {
   cursor: pointer;
   transition: all 500ms;
+  color: var(--text-color);
 }
 
 a:hover {
@@ -49,11 +62,15 @@ a:hover {
 }
 
 a:active {
-  transform: translateX(5px);
+  transform: translateY(4px);
 }
 
 .alignRight {
   text-align: end;
+}
+
+.verticalTop {
+  margin-top: 30px;
 }
 
 // Efeitos

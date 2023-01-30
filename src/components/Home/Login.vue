@@ -8,7 +8,14 @@
 
     <div class="forgotPassword">
       <a @click="handleForgotPassword">Esqueceu a senha?</a>
-      <Button @click="teste">Entrar</Button>
+      <Button>Entrar</Button>
+    </div>
+
+    <!-- Visivel apenas em telas pequenas -->
+    <div class="registerSmallDevices">
+      <Button :outlined="true" @click="handleRegister">
+        Criar uma conta!
+      </Button>
     </div>
   </div>
 </template>
@@ -25,8 +32,8 @@ function handleForgotPassword() {
   router.push({ name: 'Forgot Password' });
 }
 
-function teste() {
-  console.log('clicou');
+function handleRegister() {
+  router.push({ name: 'Register' });
 }
 </script>
 
