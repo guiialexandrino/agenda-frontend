@@ -6,9 +6,10 @@
   <InputComponent label="Senha" v-model="senha" type="password" />
 
   <p>
-    <a @click="handleForgotPassword">Esqueceu a senha?</a
-    ><button>Entrar</button>
+    <a @click="handleForgotPassword">Esqueceu a senha?</a>
   </p>
+
+  <Button @click="teste">Entrar</Button>
 </template>
 
 <script setup>
@@ -21,6 +22,10 @@ const senha = ref('');
 
 function handleForgotPassword() {
   router.push({ name: 'Forgot Password' });
+}
+
+function teste() {
+  console.log('clicou');
 }
 </script>
 
