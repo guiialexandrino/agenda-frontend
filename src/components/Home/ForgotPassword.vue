@@ -1,8 +1,12 @@
 <template>
-  <h1>Esqueceu a senha?</h1>
-  <p>Digite seu e-mail para receber uma nova senha:</p>
-  <InputComponent label="E-mail" v-model="email" />
-  <button>Enviar</button>
+  <div>
+    <h1>Esqueceu a senha?</h1>
+    <p>Digite seu e-mail para receber uma nova senha:</p>
+    <InputComponent label="E-mail" v-model="email" />
+    <div class="alignRight">
+      <Button>Enviar</Button>
+    </div>
+  </div>
 </template>
 
 <script setup>

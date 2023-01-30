@@ -1,15 +1,16 @@
 <template>
-  <h1>Login</h1>
-  <p>Realize o login para acessar os seus contatos.</p>
+  <div>
+    <h1>Login</h1>
+    <p>Realize o login para acessar os seus contatos.</p>
 
-  <InputComponent label="E-mail" v-model="email" />
-  <InputComponent label="Senha" v-model="senha" type="password" />
+    <InputComponent label="E-mail" v-model="email" />
+    <InputComponent label="Senha" v-model="senha" type="password" />
 
-  <p>
-    <a @click="handleForgotPassword">Esqueceu a senha?</a>
-  </p>
-
-  <Button @click="teste">Entrar</Button>
+    <div class="forgotPassword">
+      <a @click="handleForgotPassword">Esqueceu a senha?</a>
+      <Button @click="teste">Entrar</Button>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -29,4 +30,4 @@ function teste() {
 }
 </script>
 
-<style lang="less" scoped />
+<style src="./Login.less" scoped />

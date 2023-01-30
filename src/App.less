@@ -41,6 +41,19 @@ h3 {
 
 a {
   cursor: pointer;
+  transition: all 500ms;
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+a:active {
+  transform: translateX(5px);
+}
+
+.alignRight {
+  text-align: end;
 }
 
 // Efeitos
@@ -62,11 +75,17 @@ a {
   }
 }
 
-@keyframes buttonAnimation {
-  0% {
-    background: linear-gradient(90deg, var(--primary-color), white);
-  }
-  100% {
-    background: var(--primary-color);
-  }
+// Transição rota
+
+.v-enter-active {
+  transition: opacity 0.25s ease-in;
+}
+
+.v-leave-active {
+  transition: opacity 0.25s ease-out;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }

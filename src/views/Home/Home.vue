@@ -2,7 +2,11 @@
   <div ref="wrapper" class="wrapperLogin">
     <div ref="left" class="leftSide">
       <div class="content">
-        <RouterView />
+        <RouterView v-slot="{ Component }">
+          <Transition mode="out-in">
+            <Component :is="Component" />
+          </Transition>
+        </RouterView>
       </div>
     </div>
     <div ref="right" class="rightSide">
@@ -57,43 +61,43 @@ const logo = ref(null);
 
 function translateXEffect(route) {
   if (route === 'Register') {
-    logo.value.style.animation = 'fadeOut 0.5s';
-    logo.value.classList.add('changeLogo');
-    wrapper.value.classList.add('changeBackground');
-    window.document.documentElement.style.setProperty(
-      '--primary-color',
-      'rgba(210,77,92,1)'
-    );
+    logo.value.style.animation = 'fadeOut 0.25s';
     setTimeout(() => {
+      logo.value.classList.add('changeLogo');
+      wrapper.value.classList.add('changeBackground');
+      window.document.documentElement.style.setProperty(
+        '--primary-color',
+        'rgba(210,77,92,1)'
+      );
       left.value.style.transform = 'translateX(100%)';
       right.value.style.transform = 'translateX(-100%)';
       confirmButton.value.style.transform = 'translateX(calc(50vw - 365px))';
       logo.value.style.transform = 'translateX(calc(-50vw + 251px))';
       logo.value.style.display = 'none';
-    }, 500);
+    }, 200);
     setTimeout(() => {
-      logo.value.style.animation = 'fadeIn 1s';
+      logo.value.style.animation = 'fadeIn 0.7s';
       logo.value.style.display = 'block';
-    }, 1000);
+    }, 700);
   } else {
-    logo.value.style.animation = 'fadeOut 0.5s';
-    logo.value.classList.remove('changeLogo');
-    wrapper.value.classList.remove('changeBackground');
-    window.document.documentElement.style.setProperty(
-      '--primary-color',
-      'rgba(51, 41, 161, 1)'
-    );
+    logo.value.style.animation = 'fadeOut 0.25s';
     setTimeout(() => {
+      logo.value.classList.remove('changeLogo');
+      wrapper.value.classList.remove('changeBackground');
+      window.document.documentElement.style.setProperty(
+        '--primary-color',
+        'rgba(51, 41, 161, 1)'
+      );
       left.value.style.transform = 'translateX(0%)';
       right.value.style.transform = 'translateX(0%)';
       confirmButton.value.style.transform = 'translateX(0px)';
       logo.value.style.transform = 'translateX(0px)';
       logo.value.style.display = 'none';
-    }, 500);
+    }, 200);
     setTimeout(() => {
-      logo.value.style.animation = 'fadeIn 1s';
+      logo.value.style.animation = 'fadeIn 0.7s';
       logo.value.style.display = 'block';
-    }, 1000);
+    }, 700);
   }
 }
 </script>
