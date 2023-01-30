@@ -29,7 +29,7 @@ const getLabel = route.name === 'Login' ? 'Registre-se!' : 'Login';
 const label = ref(getLabel);
 
 const actualRoute = computed(() => route.name);
-watch(actualRoute, (page) => {
+watch(actualRoute, (page, previousPage) => {
   if (page === 'Login') {
     label.value = 'Registre-se!';
   }
@@ -39,7 +39,8 @@ watch(actualRoute, (page) => {
   if (page === 'Forgot Password') {
     label.value = 'Login';
   }
-  translateXEffect(route.name);
+  if (page === 'Register' || previousPage === 'Register')
+    translateXEffect(route.name);
 });
 
 onMounted(() => {
@@ -59,8 +60,8 @@ const right = ref(null);
 const confirmButton = ref(null);
 const logo = ref(null);
 
-function translateXEffect(route) {
-  if (route === 'Register') {
+function translateXEffect(item) {
+  if (item === 'Register') {
     logo.value.style.animation = 'fadeOut 0.25s';
     setTimeout(() => {
       logo.value.classList.add('changeLogo');
