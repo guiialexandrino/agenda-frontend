@@ -58,7 +58,7 @@ onMounted(() => {
 });
 
 function translateXEffect(item) {
-  const smallDevice = window.innerWidth <= 1368 ? true : false;
+  const smallDevice = window.innerWidth <= 1366 ? true : false;
   if (item === 'Register') {
     logo.value.style.animation = 'fadeOut 0.25s';
     setTimeout(() => {

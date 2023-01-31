@@ -26,6 +26,18 @@ const router = createRouter({
       ],
       redirect: { name: 'Login' },
     },
+    {
+      path: '/user',
+      name: 'User',
+      children: [
+        {
+          path: 'contacts',
+          name: 'Contacts',
+          component: () => import('../views/Contacts/Contacts.vue'),
+        },
+      ],
+      redirect: { name: 'Contacts' },
+    },
   ],
 });
 
