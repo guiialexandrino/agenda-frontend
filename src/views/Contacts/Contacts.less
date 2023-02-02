@@ -1,3 +1,8 @@
+.maxWidth {
+  width: 90%;
+  max-width: 1200px;
+}
+
 section {
   display: flex;
   justify-content: center;
@@ -21,10 +26,26 @@ section {
 
       .contacts-content-header {
         height: 20vh;
+        display: flex;
+        justify-content: center;
+
+        .logo {
+          background-image: url('../../assets/images/Logo.png');
+          background-repeat: no-repeat;
+          background-size: contain;
+          width: 350px;
+          height: 130px;
+        }
+
+        .menu {
+        }
       }
 
       .contacts-content-table {
-        height: 80vh;
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+        max-height: 80vh;
       }
 
       .contacts-msg {
@@ -34,7 +55,7 @@ section {
         right: 0px;
         color: white;
         background-color: var(--user-color);
-        padding: 25px;
+        padding: 20px;
         font-size: 1.6rem;
       }
     }
@@ -103,6 +124,13 @@ section {
   }
 }
 
+.navTableStyle {
+  display: flex;
+  gap: 5px;
+  justify-content: end;
+  margin-bottom: 40px;
+}
+
 @media (max-width: 1366px) {
   section {
     .wrapper-content {
@@ -129,6 +157,7 @@ section {
       }
     }
 
+    //Small Devices
     .smallDevicesHeader {
       position: absolute;
       display: flex;

@@ -1,5 +1,5 @@
 <template>
-  <div class="__inputBox">
+  <div class="__inputBox" :style="width ? `width: ${width}` : ``">
     <input
       :type="type"
       :value="modelValue"
@@ -16,6 +16,7 @@ const props = defineProps({
   label: { type: String, default: 'Default' },
   modelValue: { type: [String, Number] },
   type: { type: String, default: 'text' },
+  width: { type: String, default: 'text' },
 });
 </script>
 

@@ -1,0 +1,91 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+thead {
+  background-color: var(--user-color);
+  line-height: 2rem;
+  color: white;
+}
+
+thead,
+th,
+tr {
+  height: 40px;
+}
+
+td {
+  border: none;
+}
+
+.nav-buttons {
+  margin-bottom: 30px;
+}
+
+.no-select {
+  user-select: none;
+}
+
+.pagination {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  user-select: none;
+  text-align: center;
+}
+
+.pagination > span {
+  cursor: pointer;
+  padding: 0px 2px;
+}
+.pagination-nav:hover {
+  font-weight: 700;
+}
+
+.search-table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 0px 20px;
+  gap: 5px;
+}
+
+.search-result {
+  margin: 30px 0px;
+  text-align: center;
+}
+
+.table-mobile-breakpoint {
+  display: none;
+  padding: 0 30px;
+}
+
+@media (max-width: 800px) {
+  .hideInMobile {
+    display: none;
+  }
+  .table-mobile-breakpoint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .mobile-card {
+    display: block;
+    width: 100%;
+    text-align: start;
+    line-height: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .mobile-card > .mobile-card-inside {
+    padding: 5px 10px;
+  }
+
+  .mobile-card > div > b {
+    margin-right: 4px;
+  }
+}

@@ -1,6 +1,8 @@
 <template>
   <div :class="css">
-    <button><slot>Botão</slot></button>
+    <button>
+      <slot>Botão</slot>
+    </button>
   </div>
 </template>
 
@@ -9,11 +11,15 @@ import { computed } from 'vue';
 
 const props = defineProps({
   outlined: { type: Boolean, default: false },
+  color: { type: String },
 });
 
 const css = computed(() => {
   let cssStyle = 'btn';
-  if (props.outlined) cssStyle = `${cssStyle} btn-outlined`;
+  if (props.outlined) {
+    cssStyle = `btn btn-outlined`;
+    return cssStyle;
+  }
   return cssStyle;
 });
 </script>
