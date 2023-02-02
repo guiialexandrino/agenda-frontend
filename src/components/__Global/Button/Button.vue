@@ -1,27 +1,102 @@
 <template>
-  <div :class="css">
-    <button>
+  <div class="btn">
+    <button ref="btn" @mouseenter="checkHover" @mouseleave="checkProps">
       <slot>Botão</slot>
     </button>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { ref, onMounted } from 'vue';
+
+/* Documentação
+Config inicial: ter algum css com a variável global --primary-color configurada com alguma cor;
+
+outlined -> botão será outlined;
+outlinedHoverFillColor -> caso o botão seja outlined e quando passar o mouse preencher o fundo dele com alguma cor;
+backgroundColor -> cor padrão do fundo do botão;
+backgroundHovercolor -> muda a cor do botão ao passar o mouse;
+hoverTurnInToOutlined -> transforma o botão com fundo em outlined ao passar o mouse;
+textColor -> cor padrão do botão
+textHovercolor -> cor do texto ao passar o mouse;
+rectangle -> habilita botao com border-radius retangular
+
+ */
 
 const props = defineProps({
+  backgroundColor: {
+    type: String,
+    default: () => {
+      return window
+        .getComputedStyle(document.documentElement)
+        .getPropertyValue('--primary-color');
+    },
+  },
+  backgroundHoverColor: { type: String },
   outlined: { type: Boolean, default: false },
-  color: { type: String },
+  outlinedHoverFillColor: { type: String },
+  hoverTurnInToOutlined: { type: Boolean },
+  textColor: { type: String },
+  textHoverColor: { type: String },
 });
 
-const css = computed(() => {
-  let cssStyle = 'btn';
-  if (props.outlined) {
-    cssStyle = `btn btn-outlined`;
-    return cssStyle;
+const btn = ref(null);
+
+/* Utilizado para botões diferentes */
+function checkProps() {
+  const defaultColor = window
+    .getComputedStyle(document.documentElement)
+    .getPropertyValue('--primary-color');
+
+  if (props.backgroundColor !== defaultColor) {
+    btn.value.style.backgroundColor = props.backgroundColor;
+    btn.value.style.borderColor = props.backgroundColor;
   }
-  return cssStyle;
+
+  if (props.outlined) {
+    btn.value.style.backgroundColor = 'transparent';
+    btn.value.style.borderColor = props.backgroundColor;
+    btn.value.style.color = props.backgroundColor;
+  }
+
+  if (props.textColor) {
+    btn.value.style.color = props.textColor;
+  }
+
+  if (props.backgroundHoverColor) {
+    btn.value.style.backgroundColor = props.backgroundColor;
+  }
+}
+
+onMounted(() => {
+  checkProps();
 });
+
+function checkHover() {
+  if (props.backgroundHoverColor) {
+    btn.value.style.backgroundColor = `${props.backgroundHoverColor}`;
+    btn.value.style.borderColor = props.backgroundHoverColor;
+  }
+
+  if (props.textHoverColor) {
+    btn.value.style.color = props.textHoverColor;
+  }
+
+  if (props.outlined) {
+    btn.value.style.backgroundColor = 'transparent';
+    if (props.outlinedHoverFillColor) {
+      btn.value.style.backgroundColor = props.outlinedHoverFillColor;
+      btn.value.style.borderColor = props.outlinedHoverFillColor;
+    }
+  }
+
+  if (props.hoverTurnInToOutlined) {
+    btn.value.style.backgroundColor = 'transparent';
+    btn.value.style.borderColor = props.backgroundHoverColor
+      ? props.backgroundHoverColor
+      : props.backgroundColor;
+  }
+}
 </script>
 
 <style src="./Button.less" scoped />

@@ -3,9 +3,7 @@
     <div class="search-table">
       <InputComponent label="Buscar" width="300px" v-model="searchInput" />
       <Button @click="search">Ok</Button>
-      <!-- <Button @click="refresh">🗑</Button> -->
-      <!-- <button @click="search">Search</button> -->
-      <!-- <button @click="refresh">🗑</button> -->
+      <Button @click="refresh">Limpar</Button>
     </div>
 
     <div class="nav-buttons">
@@ -14,7 +12,6 @@
 
     <div class="search-result" v-if="searchMode">
       <b>🔍 Resultados encontrados:</b> {{ searchResult.length }}
-      <p><Button @click="refresh">Limpar Resultado</Button></p>
     </div>
 
     <div class="search-result" v-if="this.copiedTable.length === 0">

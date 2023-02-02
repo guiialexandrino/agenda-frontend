@@ -20,7 +20,12 @@
                 <div class="navTableStyle">
                   <Button :outlined="true">Deletar</Button>
                   <Button :outlined="true">Editar</Button>
-                  <Button>Adicionar</Button>
+                  <Button
+                    backgroundHoverColor="rgba(65,65,65,1)"
+                    textHoverColor="white"
+                  >
+                    Adicionar
+                  </Button>
                 </div>
               </template>
 
