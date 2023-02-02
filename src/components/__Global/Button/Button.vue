@@ -1,6 +1,11 @@
 <template>
   <div class="btn">
-    <button ref="btn" @mouseenter="checkHover" @mouseleave="checkProps">
+    <button
+      ref="btn"
+      @mouseenter="checkHover"
+      @mouseleave="checkProps"
+      :disabled="disabled"
+    >
       <slot>Botão</slot>
     </button>
   </div>
@@ -19,7 +24,8 @@ backgroundHovercolor -> muda a cor do botão ao passar o mouse;
 hoverTurnInToOutlined -> transforma o botão com fundo em outlined ao passar o mouse;
 textColor -> cor padrão do botão
 textHovercolor -> cor do texto ao passar o mouse;
-rectangle -> habilita botao com border-radius retangular
+circle -> cria botão circulo
+disabled -> botão desabilitado
 
  */
 
@@ -38,6 +44,8 @@ const props = defineProps({
   hoverTurnInToOutlined: { type: Boolean },
   textColor: { type: String },
   textHoverColor: { type: String },
+  circle: { type: Boolean },
+  disabled: { type: Boolean },
 });
 
 const btn = ref(null);
@@ -66,6 +74,13 @@ function checkProps() {
   if (props.backgroundHoverColor) {
     btn.value.style.backgroundColor = props.backgroundColor;
   }
+
+  if (props.circle) {
+    btn.value.style.borderRadius = '50%';
+    btn.value.style.padding = '0px';
+    btn.value.style.width = '39px';
+    btn.value.style.height = '39px';
+  }
 }
 
 onMounted(() => {
@@ -73,6 +88,8 @@ onMounted(() => {
 });
 
 function checkHover() {
+  if (props.disabled) return;
+
   if (props.backgroundHoverColor) {
     btn.value.style.backgroundColor = `${props.backgroundHoverColor}`;
     btn.value.style.borderColor = props.backgroundHoverColor;

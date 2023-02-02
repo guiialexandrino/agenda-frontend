@@ -2,8 +2,22 @@
   <div>
     <div class="search-table">
       <InputComponent label="Buscar" width="300px" v-model="searchInput" />
-      <Button @click="search">Ok</Button>
-      <Button @click="refresh">Limpar</Button>
+      <Button
+        :circle="true"
+        backgroundColor="transparent"
+        textColor="var(--primary-color)"
+        @click="search"
+      >
+        <ph-magnifying-glass :size="20" weight="bold" />
+      </Button>
+      <Button
+        :circle="true"
+        backgroundColor="transparent"
+        textColor="var(--primary-color)"
+        @click="refresh"
+      >
+        <ph-trash :size="20" weight="bold" />
+      </Button>
     </div>
 
     <div class="nav-buttons">
@@ -11,7 +25,15 @@
     </div>
 
     <div class="search-result" v-if="searchMode">
-      <b>🔍 Resultados encontrados:</b> {{ searchResult.length }}
+      <b>
+        <ph-magnifying-glass
+          :size="20"
+          weight="bold"
+          style="margin-right: 10px"
+        />
+        Resultados encontrados:
+      </b>
+      {{ searchResult.length }}
     </div>
 
     <div class="search-result" v-if="this.copiedTable.length === 0">
@@ -45,8 +67,9 @@
                     (header.sort && mouseHoverSort === index) ||
                     sortType === header.value
                   "
-                  >⬆</span
                 >
+                  <ph-arrow-up :size="16" weight="bold" />
+                </span>
               </span>
               <span v-else>{{ header.label }}</span>
             </th>
