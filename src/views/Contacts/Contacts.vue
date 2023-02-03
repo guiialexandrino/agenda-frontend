@@ -23,8 +23,12 @@
       </div>
 
       <!-- SmallDevices  -->
-      <div class="smallDevicesHeader">LogoSmall</div>
+      <div class="smallDevicesHeader">
+        <div class="logo"></div>
+        <div class="menu"></div>
+      </div>
       <div class="smallDevicesContent">
+        <div class="contacts-msg-small"><h1>Olá, Fulana</h1></div>
         <Content />
       </div>
     </div>

@@ -134,6 +134,10 @@ section {
   }
   .smallDevicesContent {
     display: none;
+
+    .contacts-msg-small {
+      display: none;
+    }
   }
 }
 
@@ -210,13 +214,34 @@ section {
       z-index: 2;
       background-color: var(--user-color);
       color: white;
+      box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.8);
+
+      .logo {
+        margin-left: 10px;
+        width: 30%;
+        height: 90%;
+        background-image: url('../../assets/images/Logo_branco.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
     }
 
     .smallDevicesContent {
       display: block !important;
       width: 100%;
-      margin-top: calc(35vh + 40px);
+      margin-top: calc(35vh + 30px);
       position: relative;
+
+      .contacts-msg-small {
+        display: block;
+        position: absolute;
+        top: -47px;
+        right: 0px;
+        color: white;
+        background-color: var(--user-color);
+        padding: 10px 10px;
+        font-size: 0.9rem;
+      }
     }
 
     .smallDevicesContent::after {
@@ -230,7 +255,7 @@ section {
       background-size: cover;
       background-repeat: no-repeat;
       z-index: -23;
-      opacity: 0.3;
+      opacity: 0.15;
     }
   }
 }
