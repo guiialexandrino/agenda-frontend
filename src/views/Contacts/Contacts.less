@@ -139,13 +139,25 @@ section {
 
 .navTableStyle {
   display: flex;
-  gap: 5px;
-  justify-content: end;
+  flex-wrap: wrap;
+  justify-content: space-between;
   margin-bottom: 40px;
+  gap: 10px;
+
+  h1 {
+    color: var(--user-color);
+  }
+
+  div {
+    display: flex;
+    gap: 5px;
+  }
 }
 
 @media (max-width: 1366px) {
   section {
+    // background-image: none;
+
     .wrapper-content {
       .container-photo {
         position: absolute;

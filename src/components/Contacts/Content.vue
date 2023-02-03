@@ -9,23 +9,32 @@
     >
       <template v-slot:nav-buttons>
         <div class="navTableStyle">
-          <Button :outlined="true" :disabled="selectedContacts.length === 0">
-            <ph-user-minus :size="16" weight="bold" />
-            Deletar
-          </Button>
-          <Button :outlined="true" :disabled="selectedContacts.length !== 1">
-            <ph-pencil-simple-line :size="16" weight="bold" />
-            Editar
-          </Button>
-          <Button
-            textHoverColor="white"
-            backgroundHoverColor="var(--primary-color)"
-            @click=""
-          >
-            <ph-plus :size="16" weight="bold" />
-            Adicionar
-          </Button>
+          <div>
+            <h1>Contatos ({{ contacts.length }})</h1>
+          </div>
+          <div>
+            <Button :outlined="true" :disabled="selectedContacts.length === 0">
+              <ph-user-minus :size="16" weight="bold" />
+              Deletar
+            </Button>
+            <Button :outlined="true" :disabled="selectedContacts.length !== 1">
+              <ph-pencil-simple-line :size="16" weight="bold" />
+              Editar
+            </Button>
+            <Button
+              textHoverColor="white"
+              backgroundHoverColor="var(--primary-color)"
+              @click=""
+            >
+              <ph-plus :size="16" weight="bold" />
+              Add
+            </Button>
+          </div>
         </div>
+      </template>
+
+      <template v-slot:table-title>
+        <h1>Contatos</h1>
       </template>
 
       <template v-slot:checked="{ item }">
@@ -36,7 +45,6 @@
             @click="handleUser(item)"
           />
         </div>
-        <!-- {{ item.checked }} -->
       </template>
     </Table>
   </div>
