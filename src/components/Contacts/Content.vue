@@ -33,10 +33,6 @@
         </div>
       </template>
 
-      <template v-slot:table-title>
-        <h1>Contatos</h1>
-      </template>
-
       <template v-slot:checked="{ item }">
         <div class="input-check">
           <input
