@@ -23,9 +23,10 @@ section {
       position: relative;
       width: 65%;
       height: 100vh;
+      overflow-y: auto;
 
       .contacts-content-header {
-        height: 20vh;
+        height: 15vh;
         display: flex;
         justify-content: center;
 
@@ -34,15 +35,14 @@ section {
           background-repeat: no-repeat;
           background-size: contain;
           width: 350px;
-          height: 130px;
+          height: 120px;
         }
       }
 
       .contacts-content-table {
         display: flex;
         justify-content: center;
-        padding-top: 20px;
-        max-height: 80vh;
+        max-height: 85vh;
       }
 
       .contacts-msg {
@@ -55,6 +55,22 @@ section {
         padding: 20px;
         font-size: 1.6rem;
       }
+    }
+
+    .contacts::-webkit-scrollbar {
+      width: 1.2rem;
+    }
+
+    .contacts::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    .contacts::-webkit-scrollbar-thumb {
+      background-color: var(--user-color);
+      border-radius: 20px;
+      border: 6px solid transparent;
+      background-clip: content-box;
+      transition: all 500ms;
     }
 
     .container-photo {
@@ -169,6 +185,7 @@ section {
 
     .smallDevicesContent {
       display: block !important;
+      padding: 0 10px;
       width: 100%;
       margin-top: calc(35vh + 40px);
       display: flex;

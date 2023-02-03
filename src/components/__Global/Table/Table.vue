@@ -118,7 +118,7 @@
           "
           :key="index"
         >
-          <b>{{ header.label }}:</b>
+          <b v-if="header.label">{{ header.label }}:</b>
           <slot :name="header.value" :item="item">{{
             item[header.value]
           }}</slot>
@@ -143,7 +143,7 @@
         >
           {{ label }}
         </span>
-        <span v-if="label !== pagesLabelNav[pagesLabelNav.length - 1]">/</span>
+        <span v-if="label !== pagesLabelNav[pagesLabelNav.length - 1]"> /</span>
       </span>
       <span @click="forward">»</span>
       <p><b>Página:</b> {{ actualPage }} de {{ numberOfPages }}</p>
