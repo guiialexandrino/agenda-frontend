@@ -6,7 +6,13 @@
         <div class="contacts-content-header">
           <div class="maxWidth flex-verticalCenter flex-spaceBetween">
             <div class="logo"></div>
-            <div class="menu">Menu</div>
+            <div class="menu">
+              <Menu
+                @handleProfile="handleProfile"
+                @handleUserTheme="handleUserTheme"
+                @handleLogout="handleLogout"
+              />
+            </div>
           </div>
         </div>
         <div class="contacts-content-table">
@@ -25,7 +31,14 @@
       <!-- SmallDevices  -->
       <div class="smallDevicesHeader">
         <div class="logo"></div>
-        <div class="menu"></div>
+        <div class="menu">
+          <Menu
+            color="white"
+            @handleProfile="handleProfile"
+            @handleUserTheme="handleUserTheme"
+            @handleLogout="handleLogout"
+          />
+        </div>
       </div>
       <div class="smallDevicesContent">
         <div class="contacts-msg-small"><h1>Olá, Fulana</h1></div>
@@ -37,7 +50,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import Content from '../../components/Contacts/Content.vue';
+import Menu from '../../components/Contacts/Menu/Menu.vue';
+
+const router = useRouter();
 
 const scroll = ref(null);
 const welcome = ref(null);
@@ -49,6 +66,18 @@ onMounted(() => {
     welcome.value.style.bottom = `-${scrolled}px`;
   });
 });
+
+function handleProfile() {
+  console.log('alterar perfil');
+}
+
+function handleUserTheme(color) {
+  console.log('alterar tema', color);
+}
+
+function handleLogout() {
+  router.push({ name: 'Home' });
+}
 </script>
 
 <style src="./Contacts.less" scoped />
