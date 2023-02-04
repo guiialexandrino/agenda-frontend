@@ -3,6 +3,7 @@
     <div class="wrapper-content">
       <!-- NormalScreen -->
       <div ref="scroll" class="contacts">
+        <!-- Header for NormalScreen -->
         <div class="contacts-content-header">
           <div class="maxWidth flex-verticalCenter flex-spaceBetween">
             <div class="logo"></div>
@@ -15,6 +16,8 @@
             </div>
           </div>
         </div>
+
+        <!-- Content for NormalScreen  -->
         <div class="contacts-content-table">
           <div class="maxWidth">
             <Content />
@@ -22,13 +25,14 @@
         </div>
         <div ref="welcome" class="contacts-msg"><h1>Olá, Fulana</h1></div>
       </div>
-      <!-- Show Profile Picture  -->
+
+      <!-- Show Profile Picture for All Screens -->
       <div class="container-photo">
         <div class="background-color"></div>
         <div class="photo"></div>
       </div>
 
-      <!-- SmallDevices  -->
+      <!-- Header for SmallScreen  -->
       <div class="smallDevicesHeader">
         <div class="logo"></div>
         <div class="menu">
@@ -40,6 +44,8 @@
           />
         </div>
       </div>
+
+      <!-- Content for SmallScreen  -->
       <div class="smallDevicesContent">
         <div class="contacts-msg-small"><h1>Olá, Fulana</h1></div>
         <Content />
