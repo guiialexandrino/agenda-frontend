@@ -1,6 +1,25 @@
 <template>
   <section>
     <div class="wrapper-content">
+      <!-- Header for SmallScreen  -->
+      <div class="smallDevicesHeader">
+        <div class="logo"></div>
+        <div class="menu">
+          <Menu
+            color="white"
+            @handleProfile="handleProfile"
+            @handleUserTheme="handleUserTheme"
+            @handleLogout="handleLogout"
+          />
+        </div>
+      </div>
+
+      <!-- Content for SmallScreen  -->
+      <div class="smallDevicesContent">
+        <div class="contacts-msg-small"><h1>Olá, Fulana</h1></div>
+        <Content />
+      </div>
+
       <!-- NormalScreen -->
       <div ref="scroll" class="contacts">
         <!-- Header for NormalScreen -->
@@ -31,25 +50,6 @@
         <div class="background-color"></div>
         <div class="photo"></div>
       </div>
-
-      <!-- Header for SmallScreen  -->
-      <div class="smallDevicesHeader">
-        <div class="logo"></div>
-        <div class="menu">
-          <Menu
-            color="white"
-            @handleProfile="handleProfile"
-            @handleUserTheme="handleUserTheme"
-            @handleLogout="handleLogout"
-          />
-        </div>
-      </div>
-
-      <!-- Content for SmallScreen  -->
-      <div class="smallDevicesContent">
-        <div class="contacts-msg-small"><h1>Olá, Fulana</h1></div>
-        <Content />
-      </div>
     </div>
   </section>
 </template>
@@ -57,8 +57,8 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import Content from '../../components/Contacts/Content.vue';
-import Menu from '../../components/Contacts/Menu/Menu.vue';
+import Content from '../../components/View_Contacts/Content.vue';
+import Menu from '../../components/View_Contacts/Menu/Menu.vue';
 
 const router = useRouter();
 

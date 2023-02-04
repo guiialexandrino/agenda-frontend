@@ -22,7 +22,7 @@
 <script setup>
 import { ref, watch, computed, onMounted, onUpdated } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import MobilePreviousPage from '../../components/Home/MobilePreviousPage.vue';
+import MobilePreviousPage from '../../components/View_Home/MobilePreviousPage.vue';
 
 const router = useRouter();
 const route = useRoute();

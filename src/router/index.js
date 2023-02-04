@@ -11,17 +11,17 @@ const router = createRouter({
         {
           path: 'login',
           name: 'Login',
-          component: () => import('../components/Home/Login.vue'),
+          component: () => import('../components/View_Home/Login.vue'),
         },
         {
           path: 'register',
           name: 'Register',
-          component: () => import('../components/Home/Register.vue'),
+          component: () => import('../components/View_Home/Register.vue'),
         },
         {
           path: 'forgotPassword',
           name: 'Forgot Password',
-          component: () => import('../components/Home/ForgotPassword.vue'),
+          component: () => import('../components/View_Home/ForgotPassword.vue'),
         },
       ],
       redirect: { name: 'Login' },
