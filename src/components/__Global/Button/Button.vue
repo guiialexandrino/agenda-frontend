@@ -85,6 +85,9 @@ function checkProps() {
 
 onMounted(() => {
   checkProps();
+  setTimeout(() => {
+    btn.value.style.transition = 'all 500ms';
+  }, 200);
 });
 
 function checkHover() {
