@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section ref="backgroundThemeColor">
     <div class="wrapper-content">
       <!-- Header for SmallScreen  -->
       <div class="smallDevicesHeader">
@@ -25,7 +25,7 @@
         <!-- Header for NormalScreen -->
         <div class="contacts-content-header">
           <div class="maxWidth flex-verticalCenter flex-spaceBetween">
-            <div class="logo"></div>
+            <div ref="logo" class="logo"></div>
             <div class="menu">
               <Menu
                 @handleProfile="handleProfile"
@@ -64,6 +64,8 @@ const router = useRouter();
 
 const scroll = ref(null);
 const welcome = ref(null);
+const logo = ref(null);
+const backgroundThemeColor = ref(null);
 
 onMounted(() => {
   scroll.value.addEventListener('scroll', () => {
@@ -78,7 +80,28 @@ function handleProfile() {
 }
 
 function handleUserTheme(color) {
-  console.log('alterar tema', color);
+  window.document.documentElement.style.setProperty(
+    '--user-color',
+    color.color
+  );
+  window.document.documentElement.style.setProperty(
+    '--primary-color',
+    color.color
+  );
+  window.document.documentElement.style.setProperty(
+    '--background-small-devices',
+    `url('../src/assets/images/${color.background}')`
+  );
+
+  //Remove antes
+  logo.value.classList.remove('defaultTheme');
+  logo.value.classList.remove('redTheme');
+  backgroundThemeColor.value.classList.remove('defaultThemeBackground');
+  backgroundThemeColor.value.classList.remove('redThemeBackground');
+
+  //Altera cor do logo e fundo
+  logo.value.classList.add(color.theme);
+  backgroundThemeColor.value.classList.add(`${color.theme}Background`);
 }
 
 function handleLogout() {

@@ -5,7 +5,7 @@
       <Button
         :circle="true"
         backgroundColor="transparent"
-        textColor="var(--primary-color)"
+        textColor="var(--user-color)"
         @click="search"
       >
         <ph-magnifying-glass :size="20" weight="bold" />
@@ -13,7 +13,7 @@
       <Button
         :circle="true"
         backgroundColor="transparent"
-        textColor="var(--primary-color)"
+        textColor="var(--user-color)"
         @click="refresh"
       >
         <ph-trash :size="20" weight="bold" />

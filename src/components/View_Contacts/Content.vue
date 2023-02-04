@@ -13,17 +13,26 @@
             <h1>Contatos ({{ contacts.length }})</h1>
           </div>
           <div>
-            <Button :outlined="true" :disabled="selectedContacts.length === 0">
+            <Button
+              :outlined="true"
+              :disabled="selectedContacts.length === 0"
+              backgroundColor="var(--user-color)"
+            >
               <ph-user-minus :size="16" weight="bold" />
               Deletar
             </Button>
-            <Button :outlined="true" :disabled="selectedContacts.length !== 1">
+            <Button
+              :outlined="true"
+              :disabled="selectedContacts.length !== 1"
+              backgroundColor="var(--user-color)"
+            >
               <ph-pencil-simple-line :size="16" weight="bold" />
               Editar
             </Button>
             <Button
               textHoverColor="white"
-              backgroundHoverColor="var(--primary-color)"
+              backgroundColor="var(--user-color)"
+              backgroundHoverColor="var(--user-color)"
               @click=""
             >
               <ph-plus :size="16" weight="bold" />

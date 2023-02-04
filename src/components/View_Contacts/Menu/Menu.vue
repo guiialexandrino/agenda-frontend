@@ -40,8 +40,16 @@ const props = defineProps({
 
 const menuState = ref(false);
 const colorThemes = ref([
-  { name: 'Default', color: 'rgba(51, 41, 161, 1)' },
-  { name: 'Red', color: 'rgba(210,77,92,1)' },
+  {
+    theme: 'defaultTheme',
+    color: 'rgba(51, 41, 161, 1)',
+    background: 'Background.png',
+  },
+  {
+    theme: 'redTheme',
+    color: 'rgba(210,77,92,1)',
+    background: 'Background2.png',
+  },
 ]);
 
 function handleMenu() {

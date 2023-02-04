@@ -159,6 +159,22 @@ section {
   }
 }
 
+// Change Theme Logo and Background
+.defaultTheme {
+  background-image: url('../../assets/images/Logo.png') !important;
+}
+.defaultThemeBackground {
+  background-image: url('../../assets/images/Background.png');
+}
+
+.redTheme {
+  background-image: url('../../assets/images/Logo2.png') !important;
+}
+
+.redThemeBackground {
+  background-image: url('../../assets/images/Background2.png');
+}
+
 @media (max-width: 800px) {
   .navTableStyle {
     display: block;
@@ -178,7 +194,7 @@ section {
 
 @media (max-width: 1366px) {
   section {
-    background-image: none;
+    background-image: none !important;
 
     .wrapper-content {
       .container-photo {
@@ -254,7 +270,7 @@ section {
       top: 0;
       width: 100%;
       height: 100%;
-      background-image: url('../src/assets/images/Background.png');
+      background-image: var(--background-small-devices);
       background-size: cover;
       background-repeat: no-repeat;
       z-index: -23;
