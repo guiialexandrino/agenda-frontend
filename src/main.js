@@ -5,6 +5,7 @@ import store from './store';
 import PhosphorVue from 'phosphor-vue';
 import Input from '../src/components/__Global/Input/Input.vue';
 import Button from '../src/components/__Global/Button/Button.vue';
+import Dialog from '../src/components/__Global/Dialog/Dialog.vue';
 
 const app = createApp(App);
 
@@ -16,6 +17,7 @@ app.use(PhosphorVue);
 // Registro Componentes Globais
 app.component('InputComponent', Input);
 app.component('Button', Button);
+app.component('Dialog', Dialog);
 
 // Monta Aplicação
 app.mount('#app');
