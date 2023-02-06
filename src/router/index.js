@@ -34,6 +34,12 @@ const router = createRouter({
           path: 'contacts',
           name: 'Contacts',
           component: () => import('../views/Contacts/Contacts.vue'),
+          beforeEnter: () => {
+            window.document.body.classList.add('addBackground');
+            setTimeout(() => {
+              window.document.body.classList.remove('addBackground');
+            }, 260);
+          },
         },
       ],
       redirect: { name: 'Contacts' },

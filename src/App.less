@@ -32,10 +32,9 @@ h3 {
 
 body {
   background-color: transparent;
-  // background-position-y: 50px;
   background-size: cover;
-
-  z-index: -40;
+  // background-image: url('./assets/images/Background.png');
+  // background-position-y: 50px;
 }
 
 .addBackground {
@@ -157,7 +156,7 @@ a:active {
   }
 }
 
-// Transição rota
+// Transição rota login/cadastrar/recuperar senha
 
 .v-enter-active {
   transition: opacity 0.25s ease-in;
@@ -175,9 +174,8 @@ a:active {
 // Responsividade do input[checkbox]
 @media (max-width: 800px) {
   input[type='checkbox']::before {
-    content: 'XADA';
+    content: '';
     left: 0 !important;
-    background-color: pink;
   }
 
   input[type='checkbox']:checked::before {
