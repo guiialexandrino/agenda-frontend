@@ -62,14 +62,17 @@
                 @mouseenter="mouseHoverSort = index"
               >
                 {{ `${header.label}` }}
-                <span
-                  v-if="
-                    (header.sort && mouseHoverSort === index) ||
-                    sortType === header.value
-                  "
-                >
-                  <ph-arrow-up :size="16" weight="bold" />
-                </span>
+                <Transition>
+                  <span
+                    class="filter"
+                    v-if="
+                      (header.sort && mouseHoverSort === index) ||
+                      sortType === header.value
+                    "
+                  >
+                    <ph-arrow-up :size="16" weight="bold" />
+                  </span>
+                </Transition>
               </span>
               <span v-else>{{ header.label }}</span>
             </th>
