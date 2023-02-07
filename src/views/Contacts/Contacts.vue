@@ -24,7 +24,7 @@
       <div ref="scroll" class="contacts">
         <!-- Header for NormalScreen -->
         <div class="contacts-content-header">
-          <div class="maxWidth flex-verticalCenter flex-spaceBetween">
+          <div class="maxWidth __flex-verticalCenter __flex-spaceBetween">
             <div ref="logo" class="logo"></div>
             <div class="menu">
               <Menu

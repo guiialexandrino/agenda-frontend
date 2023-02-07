@@ -54,7 +54,7 @@ const cont = ref(null);
 
 onMounted(() => {
   translateXEffect(route.name);
-  window.document.body.classList.add('addBackground');
+  window.document.body.classList.add('__addBackground');
 });
 
 function translateXEffect(item) {

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1 class="verticalTop">Esqueceu a senha?</h1>
+    <h1 class="__verticalTop">Esqueceu a senha?</h1>
     <p>Digite seu e-mail para receber uma nova senha:</p>
     <InputComponent label="E-mail" v-model="email" />
-    <div class="alignRight">
+    <div class="__alignRight">
       <Button>Enviar</Button>
     </div>
   </div>

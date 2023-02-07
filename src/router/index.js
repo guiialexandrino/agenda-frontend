@@ -35,9 +35,9 @@ const router = createRouter({
           name: 'Contacts',
           component: () => import('../views/Contacts/Contacts.vue'),
           beforeEnter: () => {
-            window.document.body.classList.add('addBackground');
+            window.document.body.classList.add('__addBackground');
             setTimeout(() => {
-              window.document.body.classList.remove('addBackground');
+              window.document.body.classList.remove('__addBackground');
             }, 260);
           },
         },

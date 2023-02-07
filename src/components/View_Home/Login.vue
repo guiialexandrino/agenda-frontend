@@ -37,7 +37,7 @@ function handleRegister() {
 }
 
 function handleLogin() {
-  window.document.body.classList.remove('addBackground');
+  window.document.body.classList.remove('__addBackground');
   router.push({ name: 'Contacts' });
 }
 </script>

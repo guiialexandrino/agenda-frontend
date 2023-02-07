@@ -10,7 +10,7 @@
       {{ tipo === 'add' ? 'Adicionar Contato' : 'Editar Contato' }}
     </h1>
   </div>
-  <div class="flex-verticalCenter flex-horizontalCenter">
+  <div class="__flex-verticalCenter __flex-horizontalCenter">
     <div class="contentDialog">
       <InputComponent label="Nome" v-model="userData.name" />
       <InputComponent label="E-mail" v-model="userData.email" />

@@ -38,10 +38,6 @@ body {
   // background-position-y: 50px;
 }
 
-.addBackground {
-  background-image: url('./assets/images/Background.png');
-}
-
 body,
 input {
   color: var(--text-color);
@@ -115,27 +111,37 @@ a:active {
   transform: translateY(4px);
 }
 
-.alignRight {
+.__addBackground {
+  background-image: url('./assets/images/Background.png');
+}
+
+.__alignRight {
   text-align: end;
 }
 
-.verticalTop {
+.__verticalTop {
   margin-top: 30px;
 }
 
 // Alinhamentos
-.flex-verticalCenter {
+.__flex-verticalCenter {
   display: flex;
   align-items: center;
 }
 
-.flex-horizontalCenter {
+.__flex-horizontalCenter {
   justify-content: center;
 }
 
-.flex-spaceBetween {
+.__flex-spaceBetween {
   display: flex;
   justify-content: space-between;
+}
+
+.__dialogContent {
+  margin: 20px 0;
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 // Efeitos
