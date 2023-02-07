@@ -34,11 +34,13 @@ const router = createRouter({
           path: 'contacts',
           name: 'Contacts',
           component: () => import('../views/Contacts/Contacts.vue'),
-          beforeEnter: () => {
-            window.document.body.classList.add('__addBackground');
-            setTimeout(() => {
-              window.document.body.classList.remove('__addBackground');
-            }, 260);
+          beforeEnter: (to, from) => {
+            if (from.name === 'Login') {
+              window.document.body.classList.add('__addBackground');
+              setTimeout(() => {
+                window.document.body.classList.remove('__addBackground');
+              }, 260);
+            }
           },
         },
       ],
