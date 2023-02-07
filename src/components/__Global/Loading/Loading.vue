@@ -10,10 +10,13 @@
 </template>
 
 <!-- 
-How use?
+How use without async/await or promises?
 
 1) store.dispatch('loadingInit');
-2) store.dispatch('loadingDone');
+2) code
+3) setTimeout(() => {
+        this.$store.dispatch('loadingDoneMethod');
+    }, 300);
  -->
 
 <script setup>

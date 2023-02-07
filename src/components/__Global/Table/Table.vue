@@ -303,30 +303,34 @@ export default {
 
     /* Executa a procura dentro da array */
     search() {
-      this.searchMode = true;
-      const ignore = this.headers.map((item) => item.value);
+      this.$store.dispatch('loadingInit');
+      this.simulate().then(() => {
+        this.searchMode = true;
+        const ignore = this.headers.map((item) => item.value);
 
-      if (
-        this.searchInput.length === 0 ||
-        this.searchInput === ' ' ||
-        ignore.includes(this.searchInput)
-      ) {
-        this.noSearchResult();
-        return;
-      }
+        if (
+          this.searchInput.length === 0 ||
+          this.searchInput === ' ' ||
+          ignore.includes(this.searchInput)
+        ) {
+          this.noSearchResult();
+          return;
+        }
 
-      const result = this.data.filter((item) => {
-        let check = JSON.stringify(item).toLowerCase();
-        if (check.includes(this.searchInput)) return item;
+        const result = this.data.filter((item) => {
+          let check = JSON.stringify(item).toLowerCase();
+          if (check.includes(this.searchInput)) {
+            return item;
+          }
+        });
+
+        this.searchResult = result;
+        this.actualPage = 1;
+        this.copiedTable = this.showItensPerPage(this.searchResult);
+        this.showNumberPages(
+          Math.ceil(this.searchResult.length / this.maxPerPage)
+        );
       });
-
-      this.searchResult = result;
-
-      this.actualPage = 1;
-      this.copiedTable = this.showItensPerPage(this.searchResult);
-      this.showNumberPages(
-        Math.ceil(this.searchResult.length / this.maxPerPage)
-      );
     },
 
     /* Resultado não encontrado */
@@ -335,19 +339,19 @@ export default {
       this.searchResult = [];
       this.actualPage = 1;
       this.numberOfPages = 1;
-      this.showNumberPages(
-        Math.ceil(this.copiedTable.length / this.maxPerPage)
-      );
     },
 
     /* Limpa a busca e retorna os dados iniciais da Array passada pela prop :data */
     refresh() {
-      this.copiedTable = this.showItensPerPage(this.data);
-      this.showNumberPages(this.showNumberOfPages);
-      this.searchMode = false;
-      this.actualPage = 1;
-      this.searchInput = '';
-      this.sortType = '';
+      this.$store.dispatch('loadingInit');
+      this.simulate().then(() => {
+        this.copiedTable = this.showItensPerPage(this.data);
+        this.showNumberPages(this.showNumberOfPages);
+        this.searchMode = false;
+        this.actualPage = 1;
+        this.searchInput = '';
+        this.sortType = '';
+      });
     },
 
     /* Sort por ordem alfabética/numerica */
@@ -369,6 +373,15 @@ export default {
         });
 
       this.sortType = value;
+    },
+
+    simulate() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          this.$store.dispatch('loadingDoneMethod');
+          resolve();
+        }, 300);
+      });
     },
   },
 };
