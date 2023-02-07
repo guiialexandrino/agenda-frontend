@@ -3,6 +3,7 @@ import { createStore } from 'vuex';
 export default createStore({
   state: {
     loading: false,
+    loadingDone: 0,
     closeDialog: 0,
     dialogAlert: {
       open: false,
@@ -18,6 +19,9 @@ export default createStore({
     UPDATE_LOADING(state, payload) {
       state.loading = payload;
     },
+    UPDATE_LOADINGDONE(state, payload) {
+      state.loadingDone = payload;
+    },
     UPDATE_CLOSEDIALOG(state, payload) {
       state.closeDialog = payload;
     },
@@ -27,8 +31,15 @@ export default createStore({
   },
 
   actions: {
-    loadingChange(context, payload) {
-      context.commit('UPDATE_LOADING', payload);
+    loadingInit(context) {
+      context.commit('UPDATE_LOADING', true);
+    },
+
+    loadingDoneMethod(context) {
+      context.commit('UPDATE_LOADINGDONE', context.state.loadingDone + 1);
+      setTimeout(() => {
+        context.commit('UPDATE_LOADING', false);
+      }, 430);
     },
 
     closeDialog(context) {
