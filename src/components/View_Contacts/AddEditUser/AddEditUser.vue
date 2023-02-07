@@ -11,7 +11,7 @@
     </h1>
   </div>
   <div class="__flex-verticalCenter __flex-horizontalCenter">
-    <div class="contentDialog">
+    <div class="contentDialog __dialogOverflow">
       <InputComponent label="Nome" v-model="userData.name" />
       <InputComponent label="E-mail" v-model="userData.email" />
       <InputComponent label="Número" v-model="userData.number" />

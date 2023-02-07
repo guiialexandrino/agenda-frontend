@@ -138,10 +138,28 @@ a:active {
   justify-content: space-between;
 }
 
-.__dialogContent {
-  margin: 20px 0;
-  max-height: 70vh;
+.__dialogOverflow {
+  padding: 0 20px;
+  max-height: 50vh;
   overflow-y: auto;
+  overflow-x: hidden;
+}
+
+//ScrollBar
+::-webkit-scrollbar {
+  width: 1.2rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--user-color);
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+  transition: all 500ms;
 }
 
 // Efeitos
