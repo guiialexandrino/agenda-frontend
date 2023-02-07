@@ -61,4 +61,4 @@ watch(closeDialogVuex, () => {
 });
 </script>
 
-<style scoped src="./Dialog.less" />
+<style src="./Dialog.less" />

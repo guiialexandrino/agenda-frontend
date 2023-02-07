@@ -50,5 +50,3 @@ function emitCancel() {
   store.dispatch('closeDialog');
 }
 </script>
-
-<style src="./AddEditUser.less" scoped />

@@ -9,5 +9,3 @@ const props = defineProps({
   users: { type: Array },
 });
 </script>
-
-<style src="./DeleteUser.less" />
