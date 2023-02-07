@@ -1,7 +1,7 @@
 <template>
   <div ref="dialog" class="backgroundDialog">
     <div class="dialogCard" :style="`width: ${width}`">
-      <div class="closeDialog">
+      <div v-if="!noHandleClose" class="closeDialog">
         <Button
           :circle="true"
           backgroundColor="transparent"
@@ -22,6 +22,7 @@ import { useStore } from 'vuex';
 
 const props = defineProps({
   width: { type: String, default: '500px' },
+  noHandleClose: { type: Boolean, default: false },
 });
 
 const emit = defineEmits(['close']);

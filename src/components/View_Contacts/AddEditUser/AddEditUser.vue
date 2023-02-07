@@ -23,6 +23,7 @@
       textHoverColor="white"
       backgroundColor="var(--user-color)"
       backgroundHoverColor="var(--user-color)"
+      @click="handleDone"
       >{{ tipo === 'add' ? 'Adicionar' : 'Editar' }}</Button
     >
   </div>
@@ -48,5 +49,15 @@ loadEditDataUser();
 
 function emitCancel() {
   store.dispatch('closeDialog');
+}
+
+function handleDone() {
+  emitCancel();
+  store.dispatch('dialogAlert', {
+    open: true,
+    success: true,
+    message: 'Usuário adicionado com sucesso!',
+    info: null,
+  });
 }
 </script>
