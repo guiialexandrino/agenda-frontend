@@ -11,37 +11,32 @@
           <ph-x :size="20" weight="bold" />
         </Button>
       </div>
-      <slot name="header"></slot>
-      <div class="dialogContent">
-        <slot name="content"></slot>
-      </div>
-      <slot name="footer"></slot>
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
+import { useStore } from 'vuex';
 
 const props = defineProps({
-  width: { type: String, default: '800px' },
+  width: { type: String, default: '500px' },
 });
 
 const emit = defineEmits(['close']);
-
 const dialog = ref(null);
 
 onMounted(() => {
-  dialog.value.focus();
   window.document.body.style.overflowY = 'hidden';
   dialog.value.style.visibility = 'visible';
   dialog.value.style.animation = 'fadeIn 0.5s';
-  window.addEventListener('keyup', handleClose);
+  window.addEventListener('keyup', checkKeyPressed);
 });
 
 onUnmounted(() => {
   window.document.body.style.overflowY = 'auto';
-  window.removeEventListener('keyup', handleClose);
+  window.removeEventListener('keyup', checkKeyPressed);
 });
 
 function handleClose() {
@@ -49,8 +44,21 @@ function handleClose() {
   setTimeout(() => {
     dialog.value.style.animation = 'none';
     emit('close');
-  }, 500);
+  }, 450);
 }
+
+function checkKeyPressed(e) {
+  if (e.defaultPrevented) return;
+  if (e.keyCode === 27 || (e.key === 'Escape' && dialog.value)) {
+    handleClose();
+  }
+}
+
+const store = useStore();
+const closeDialogVuex = computed(() => store.state.closeDialog);
+watch(closeDialogVuex, () => {
+  handleClose();
+});
 </script>
 
 <style scoped src="./Dialog.less" />
