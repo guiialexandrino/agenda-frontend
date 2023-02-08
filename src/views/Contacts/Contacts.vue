@@ -47,10 +47,24 @@
 
       <!-- Show Profile Picture for All Screens -->
       <div class="container-photo">
+        <Button
+          id="btn"
+          backgroundColor="white"
+          backgroundHoverColor="var(--user-color)"
+          textColor="var(--user-color)"
+          textHoverColor="white"
+          @click="handleChangePhoto"
+        >
+          <ph-user-focus :size="16" weight="bold" />
+          Alterar Foto
+        </Button>
         <div class="background-color"></div>
         <div class="photo"></div>
       </div>
     </div>
+    <Dialog v-if="dialogPhoto" @close="dialogPhoto = false" width="800px">
+      <ChangePhoto />
+    </Dialog>
   </section>
 </template>
 
@@ -59,6 +73,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import Content from '../../components/View_Contacts/Content.vue';
 import Menu from '../../components/View_Contacts/Menu/Menu.vue';
+import ChangePhoto from '../../components/View_Contacts/ChangePhoto/ChangePhoto.vue';
 
 const router = useRouter();
 
@@ -66,6 +81,7 @@ const scroll = ref(null);
 const welcome = ref(null);
 const logo = ref(null);
 const backgroundThemeColor = ref(null);
+const dialogPhoto = ref(false);
 
 onMounted(() => {
   scroll.value.addEventListener('scroll', () => {
@@ -106,6 +122,10 @@ function handleUserTheme(color) {
 
 function handleLogout() {
   router.push({ name: 'Home' });
+}
+
+function handleChangePhoto() {
+  dialogPhoto.value = true;
 }
 </script>
 

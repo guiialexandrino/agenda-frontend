@@ -69,6 +69,14 @@ section {
       background-size: cover;
       box-shadow: 0px 0px 30px 5px rgba(0, 0, 0, 0.3);
 
+      #btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        opacity: 0.9;
+        z-index: 50;
+      }
+
       .background-color {
         position: absolute;
         top: 0px;
@@ -188,6 +196,12 @@ section {
         height: calc(35vh - 30px);
         z-index: -4;
 
+        #btn {
+          left: 5px;
+          top: calc(35vh - 75px);
+          transform: scale(0.9);
+        }
+
         .photo {
           background-position-y: 20%;
         }
@@ -238,12 +252,12 @@ section {
       .contacts-msg-small {
         display: block;
         position: absolute;
-        top: -47px;
+        top: -50px;
         right: 0px;
         color: white;
         background-color: var(--user-color);
         padding: 10px 10px;
-        font-size: 0.9rem;
+        font-size: 1rem;
       }
     }
 
