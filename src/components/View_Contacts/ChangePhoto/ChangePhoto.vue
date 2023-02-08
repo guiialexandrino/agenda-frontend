@@ -24,13 +24,19 @@
       </Button>
 
       <p>
-        <b>Atenção</b>, sua foto deve ter ao menos 600px largura por 960px
-        altura.
+        <b>Atenção</b>, sua foto deve ter ao menos 1000px de largura por 1000px
+        de altura.
       </p>
 
       <Transition mode="in-out">
         <span v-if="!minSize" style="color: var(--primary-color)">
           <ph-warning :size="15" weight="bold" /> Tamanho inválido.
+        </span>
+      </Transition>
+
+      <Transition mode="in-out">
+        <span v-if="!allowedFormat" style="color: var(--primary-color)">
+          <ph-warning :size="15" weight="bold" /> Formato do arquivo é inválido.
         </span>
       </Transition>
 
@@ -60,6 +66,7 @@ const loadImg = ref(null);
 let crop = '';
 let reader = null;
 let minSize = ref(true);
+let allowedFormat = ref(true);
 
 function emitCancel() {
   store.dispatch('closeDialog');
@@ -67,6 +74,16 @@ function emitCancel() {
 
 function selectImg(event) {
   minSize.value = true;
+  allowedFormat.value = true;
+
+  const validFormats = ['png', 'jpg', 'jpeg'];
+  const check = event.target.files[0].type.split('/');
+
+  if (!validFormats.includes(check[check.length - 1])) {
+    allowedFormat.value = false;
+    return;
+  }
+
   if (event.target.files.length) {
     // start file reader
     reader = new FileReader();
@@ -79,7 +96,7 @@ function selectImg(event) {
 
         img.onload = () => {
           // check min dimensions
-          if ((img.naturalWidth < 600) & (img.naturalHeight < 960)) {
+          if ((img.naturalWidth < 999) & (img.naturalHeight < 999)) {
             minSize.value = false;
             loadImg.value.innerHTML = '<br/>';
             return;
