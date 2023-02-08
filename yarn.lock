@@ -376,6 +376,11 @@
   dependencies:
     "is-what" "^3.14.1"
 
+"cropperjs@^1.5.13":
+  "integrity" "sha512-by7jKAo73y5/Do0K6sxdTKHgndY0NMjG2bEdgeJxycbcmHuCiMXqw8sxy5C5Y5WTOTcDGmbT7Sr5CgKOXR06OA=="
+  "resolved" "https://registry.npmjs.org/cropperjs/-/cropperjs-1.5.13.tgz"
+  "version" "1.5.13"
+
 "csstype@^2.6.8":
   "integrity" "sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w=="
   "resolved" "https://registry.npmjs.org/csstype/-/csstype-2.6.21.tgz"
