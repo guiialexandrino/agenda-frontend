@@ -120,6 +120,7 @@ function selectImg(event) {
             aspectRatio: 1 / 1.45,
             background: false,
             zoomable: false,
+            zoomOnWheel: false,
             zoomOnTouch: false,
             minCropBoxWidth: 660,
           });
