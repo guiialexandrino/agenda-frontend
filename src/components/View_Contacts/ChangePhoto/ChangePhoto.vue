@@ -46,9 +46,11 @@
   <div class="footerDialog">
     <Button :outlined="true" @click="emitCancel">Cancelar</Button>
     <Button
+      :disabled="!canUpload"
       textHoverColor="white"
       backgroundColor="var(--user-color)"
       backgroundHoverColor="var(--user-color)"
+      @click="handleConfirm"
     >
       Confirmar
     </Button>
@@ -63,10 +65,12 @@ import Cropper from 'cropperjs';
 const store = useStore();
 const handleUpload = ref(null);
 const loadImg = ref(null);
-let crop = '';
 let reader = null;
+let crop = '';
+let imgType = '';
 let minSize = ref(true);
 let allowedFormat = ref(true);
+let canUpload = ref(false);
 
 function emitCancel() {
   store.dispatch('closeDialog');
@@ -75,16 +79,18 @@ function emitCancel() {
 function selectImg(event) {
   minSize.value = true;
   allowedFormat.value = true;
-
-  const validFormats = ['png', 'jpg', 'jpeg'];
-  const check = event.target.files[0].type.split('/');
-
-  if (!validFormats.includes(check[check.length - 1])) {
-    allowedFormat.value = false;
-    return;
-  }
+  canUpload.value = false;
 
   if (event.target.files.length) {
+    const validFormats = ['png', 'jpg', 'jpeg'];
+    imgType = event.target.files[0].type;
+    const check = event.target.files[0].type.split('/');
+
+    if (!validFormats.includes(check[check.length - 1])) {
+      allowedFormat.value = false;
+      return;
+    }
+
     // start file reader
     reader = new FileReader();
     reader.onload = async (e) => {
@@ -111,16 +117,42 @@ function selectImg(event) {
           // init cropper
           crop = new Cropper(img, {
             viewMode: 3,
-            aspectRatio: 1 / 1.85,
+            aspectRatio: 1 / 1.45,
             background: false,
             zoomable: false,
             zoomOnTouch: false,
+            minCropBoxWidth: 660,
           });
+          canUpload.value = true;
         };
       }
     };
     reader.readAsDataURL(event.target.files[0]);
   }
+}
+
+function handleConfirm() {
+  // crop
+  //   .getCroppedCanvas({
+  //     width: 660,
+  //   })
+  //   .toBlob((blob) => {
+  //     const formData = new FormData();
+  //     formData.append('croppedImage', blob);
+  //   });
+
+  //Código de Download é Temporário
+  const format = imgType.split('/');
+  let imgSrc = crop
+    .getCroppedCanvas({
+      width: 660,
+    })
+    .toDataURL(imgType);
+  const link = document.createElement('a');
+  link.href = imgSrc;
+  link.setAttribute('download', `Teste.${format[format.length - 1]}`);
+  document.body.appendChild(link);
+  link.click();
 }
 </script>
 
