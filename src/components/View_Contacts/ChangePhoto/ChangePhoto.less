@@ -1,7 +1,13 @@
+@import 'cropperjs/dist/cropper.css';
+
 .rectangular {
   button {
     border-radius: 10px !important;
     transform: scale(0.9);
+  }
+
+  button:active {
+    transform: scale(0.9) !important;
   }
 }
 
@@ -9,6 +15,13 @@
   width: 100%;
 
   img {
+    display: block;
     max-width: 100%;
+    max-height: 100%;
+    z-index: -10;
   }
+}
+
+.upload {
+  height: 60px;
 }

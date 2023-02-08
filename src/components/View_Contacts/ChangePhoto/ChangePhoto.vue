@@ -18,10 +18,22 @@
       <Button
         class="rectangular"
         :outlined="true"
-        @click="$refs.handleUpload.click()"
+        @click="handleUpload.click()"
       >
         <ph-upload-simple :size="16" weight="bold" />Carregar Foto
       </Button>
+
+      <p>
+        <b>Atenção</b>, sua foto deve ter ao menos 600px largura por 960px
+        altura.
+      </p>
+
+      <Transition mode="in-out">
+        <span v-if="!minSize" style="color: var(--primary-color)">
+          <ph-warning :size="15" weight="bold" /> Tamanho inválido.
+        </span>
+      </Transition>
+
       <div class="img-upload" ref="loadImg"></div>
     </div>
   </div>
@@ -40,34 +52,54 @@
 <script setup>
 import { ref } from 'vue';
 import { useStore } from 'vuex';
+import Cropper from 'cropperjs';
 
 const store = useStore();
 const handleUpload = ref(null);
 const loadImg = ref(null);
+let crop = '';
+let reader = null;
+let minSize = ref(true);
 
 function emitCancel() {
   store.dispatch('closeDialog');
 }
 
 function selectImg(event) {
+  minSize.value = true;
   if (event.target.files.length) {
     // start file reader
-    const reader = new FileReader();
-    reader.onload = (e) => {
+    reader = new FileReader();
+    reader.onload = async (e) => {
       if (e.target.result) {
         // create new image
         let img = window.document.createElement('img');
         img.id = 'image';
         img.src = e.target.result;
 
-        // clean result before
-        loadImg.value.innerHTML = '<br/>';
+        img.onload = () => {
+          // check min dimensions
+          if ((img.naturalWidth < 600) & (img.naturalHeight < 960)) {
+            minSize.value = false;
+            loadImg.value.innerHTML = '<br/>';
+            return;
+          }
 
-        // append new image
-        loadImg.value.appendChild(img);
+          // clean result before
+          loadImg.value.innerHTML = '<br/>';
 
-        // init cropper
-        // cropper = new Cropper(img);
+          // append new image
+          loadImg.value.appendChild(img);
+
+          // init cropper
+          crop = new Cropper(img, {
+            viewMode: 3,
+            aspectRatio: 1 / 1.85,
+            background: false,
+            zoomable: false,
+            zoomOnTouch: false,
+          });
+        };
       }
     };
     reader.readAsDataURL(event.target.files[0]);
