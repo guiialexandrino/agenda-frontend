@@ -14,6 +14,22 @@ export default {
     return req.data;
   },
 
+  async addContact(name, email, number) {
+    const path = `/api/addContact`;
+    let req = '';
+    try {
+      req = await http.post(
+        path,
+        { name: name, email: email, number: number },
+        await getHeaders()
+      );
+    } catch (e) {
+      return e.response.data;
+    }
+
+    return req.data;
+  },
+
   async editContact(id, name, email, number) {
     const path = `/api/editContact/${id}`;
     let req = '';

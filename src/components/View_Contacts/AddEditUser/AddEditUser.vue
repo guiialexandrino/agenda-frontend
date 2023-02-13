@@ -18,8 +18,8 @@
     </div>
   </div>
 
-  <Transition mode="out-in">
-    <div class="__error" v-html="error"></div>
+  <Transition>
+    <div v-if="error" class="__error" v-html="error"></div>
   </Transition>
 
   <div class="footerDialog">
@@ -63,13 +63,35 @@ async function handleDone() {
   if (props.tipo === 'edit') {
     await editUser();
   } else {
-    emitCancel();
-    store.dispatch('dialogAlert', {
-      open: true,
-      success: true,
-      message: 'Usuário adicionado com sucesso!',
-      info: null,
-    });
+    await addUser();
+  }
+}
+
+async function addUser() {
+  try {
+    store.dispatch('loadingInit');
+    const req = await Reqs.addContact(
+      userData.value.name,
+      userData.value.email,
+      userData.value.number
+    );
+
+    if (req.success) {
+      emitCancel();
+      store.dispatch('dialogAlert', {
+        open: true,
+        success: true,
+        message: 'Contato adicionado!',
+        info: `O contato <b>${req.data.name}</b> foi adicionado`,
+      });
+      emits('done');
+    } else {
+      error.value = req.error;
+    }
+  } catch (e) {
+    console.log(e);
+  } finally {
+    store.dispatch('loadingDoneMethod');
   }
 }
 
@@ -88,8 +110,8 @@ async function editUser() {
       store.dispatch('dialogAlert', {
         open: true,
         success: true,
-        message: 'Usuário editado',
-        info: `O Usuário <b>${req.data.name}</b> foi editado com sucesso!`,
+        message: 'Contato editado',
+        info: `O contato <b>${req.data.name}</b> foi editado com sucesso!`,
       });
       emits('done');
     } else {
