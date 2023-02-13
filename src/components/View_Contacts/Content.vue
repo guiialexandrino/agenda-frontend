@@ -62,7 +62,7 @@
     </Dialog>
 
     <Dialog v-if="dialogDelete" @close="dialogDelete = false">
-      <DeleteUser :users="selectedContacts" />
+      <DeleteUser :users="selectedContacts" @done="refresh" />
     </Dialog>
   </div>
 </template>

@@ -36,12 +36,16 @@
       {{ searchResult.length }}
     </div>
 
-    <div class="search-result" v-if="this.copiedTable.length === 0">
+    <div class="search-result" v-if="copiedTable.length === 0 && !searchMode">
+      Ops, parece que você ainda não possui nenhum contanto :(
+    </div>
+
+    <div class="search-result" v-if="copiedTable.length === 0 && searchMode">
       Ops, sua busca não teve nenhum resultado :(
     </div>
 
     <!-- Inicio Interface Tabela -->
-    <div v-else class="hideInMobile">
+    <div v-if="copiedTable.length > 0" class="hideInMobile">
       <table @mouseout="mouseHoverSort = ''">
         <thead>
           <tr>

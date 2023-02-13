@@ -45,4 +45,16 @@ export default {
 
     return req.data;
   },
+
+  async deleteContact(id) {
+    const path = `/api/deleteContact/${id}`;
+    let req = '';
+    try {
+      req = await http.delete(path, await getHeaders());
+    } catch (e) {
+      return e.response.data;
+    }
+
+    return req.data;
+  },
 };
