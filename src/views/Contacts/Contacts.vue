@@ -48,7 +48,7 @@
       </div>
 
       <!-- Show Profile Picture for All Screens -->
-      <div class="container-photo">
+      <div :style="userAvatar" class="container-photo">
         <Button
           id="btn"
           backgroundColor="white"
@@ -61,22 +61,23 @@
           Alterar Foto
         </Button>
         <div class="background-color"></div>
-        <div class="photo"></div>
+        <div :style="userAvatar" class="photo"></div>
       </div>
     </div>
     <Dialog v-if="dialogPhoto" @close="dialogPhoto = false" width="800px">
-      <ChangePhoto />
+      <ChangePhoto @done="uploadDone" />
     </Dialog>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onBeforeUpdate } from 'vue';
 import { useRouter } from 'vue-router';
 import Content from '../../components/View_Contacts/Content.vue';
 import Menu from '../../components/View_Contacts/Menu/Menu.vue';
 import ChangePhoto from '../../components/View_Contacts/ChangePhoto/ChangePhoto.vue';
 import localforage from 'localforage';
+import { upload } from '../../requisitions/base/baseUrl.js';
 
 const router = useRouter();
 
@@ -86,16 +87,24 @@ const logo = ref(null);
 const backgroundThemeColor = ref(null);
 const dialogPhoto = ref(false);
 const userName = ref('');
+const userAvatar = ref('');
 
 onMounted(async () => {
-  const user = await localforage.getItem('user');
-  userName.value = user.name;
+  uploadDone();
   scroll.value.addEventListener('scroll', () => {
     const scrolled = scroll.value.scrollTop;
 
     welcome.value.style.bottom = `-${scrolled}px`;
   });
 });
+
+async function uploadDone() {
+  const user = await localforage.getItem('user');
+  userName.value = user.name;
+  userAvatar.value = user.avatar
+    ? `background-image: url(${upload}/${user.avatar})`
+    : 'background-image: var(--image)';
+}
 
 function handleProfile() {
   console.log('alterar perfil');
@@ -135,4 +144,4 @@ function handleChangePhoto() {
 }
 </script>
 
-<style src="./Contacts.less" scoped />
+<style lang="less" src="./Contacts.less" scoped />

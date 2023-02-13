@@ -1,5 +1,5 @@
 <template>
-  <div ref="loading" class="backgroundDialog">
+  <div ref="loading" class="backgroundLoading">
     <div class="lds-ring">
       <div></div>
       <div></div>

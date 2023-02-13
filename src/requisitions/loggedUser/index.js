@@ -57,4 +57,16 @@ export default {
 
     return req.data;
   },
+
+  async uploadAvatar(formData) {
+    const path = `/api/uploadAvatar`;
+    let req = '';
+    try {
+      req = await http.put(path, formData, await getHeaders());
+    } catch (e) {
+      return e.response.data;
+    }
+
+    return req.data;
+  },
 };

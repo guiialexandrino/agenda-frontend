@@ -61,8 +61,12 @@
 import { ref } from 'vue';
 import { useStore } from 'vuex';
 import Cropper from 'cropperjs';
+import Reqs from '../../../requisitions/loggedUser';
+import localforage from 'localforage';
 
 const store = useStore();
+const emits = defineEmits(['done']);
+
 const handleUpload = ref(null);
 const loadImg = ref(null);
 let reader = null;
@@ -132,28 +136,47 @@ function selectImg(event) {
   }
 }
 
-function handleConfirm() {
-  // crop
-  //   .getCroppedCanvas({
-  //     width: 660,
-  //   })
-  //   .toBlob((blob) => {
-  //     const formData = new FormData();
-  //     formData.append('croppedImage', blob);
-  //   });
-
-  //Código de Download é Temporário
-  const format = imgType.split('/');
-  let imgSrc = crop
+async function handleConfirm() {
+  crop
     .getCroppedCanvas({
       width: 660,
     })
-    .toDataURL(imgType);
-  const link = document.createElement('a');
-  link.href = imgSrc;
-  link.setAttribute('download', `Teste.${format[format.length - 1]}`);
-  document.body.appendChild(link);
-  link.click();
+    .toBlob(async (blob) => {
+      const formData = new FormData();
+      formData.append('avatar', blob);
+      store.dispatch('loadingInit');
+      try {
+        const req = await Reqs.uploadAvatar(formData);
+        if (req.success) {
+          emitCancel();
+          store.dispatch('dialogAlert', {
+            open: true,
+            success: true,
+            message: 'Upload Feito!',
+            info: `A sua <b>foto de perfil</b> foi alterada com sucesso!`,
+          });
+          await localforage.setItem('user', req.data);
+          emits('done');
+        }
+      } catch (e) {
+        console.log(e);
+      } finally {
+        store.dispatch('loadingDoneMethod');
+      }
+    });
+
+  //Código de Download é Temporário
+  // const format = imgType.split('/');
+  // let imgSrc = crop
+  //   .getCroppedCanvas({
+  //     width: 660,
+  //   })
+  //   .toDataURL(imgType);
+  // const link = document.createElement('a');
+  // link.href = imgSrc;
+  // link.setAttribute('download', `Teste.${format[format.length - 1]}`);
+  // document.body.appendChild(link);
+  // link.click();
 }
 </script>
 
