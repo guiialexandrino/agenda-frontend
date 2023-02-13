@@ -17,6 +17,11 @@
       <InputComponent label="Número" v-model="userData.number" />
     </div>
   </div>
+
+  <Transition mode="out-in">
+    <div class="__error" v-html="error"></div>
+  </Transition>
+
   <div class="footerDialog">
     <Button :outlined="true" @click="emitCancel">Cancelar</Button>
     <Button
@@ -32,14 +37,17 @@
 <script setup>
 import { ref } from 'vue';
 import { useStore } from 'vuex';
+import Reqs from '../../../requisitions/loggedUser/';
 
 const store = useStore();
 const props = defineProps({
   tipo: { type: String, default: 'add' }, // add or edit
   user: { type: Array, default: () => [] },
 });
+const emits = defineEmits(['done']);
 
 const userData = ref({ name: '', email: '', number: '' });
+const error = ref('');
 
 function loadEditDataUser() {
   if (props.tipo === 'edit') userData.value = { ...props.user[0] };
@@ -51,13 +59,46 @@ function emitCancel() {
   store.dispatch('closeDialog');
 }
 
-function handleDone() {
-  emitCancel();
-  store.dispatch('dialogAlert', {
-    open: true,
-    success: true,
-    message: 'Usuário adicionado com sucesso!',
-    info: null,
-  });
+async function handleDone() {
+  if (props.tipo === 'edit') {
+    await editUser();
+  } else {
+    emitCancel();
+    store.dispatch('dialogAlert', {
+      open: true,
+      success: true,
+      message: 'Usuário adicionado com sucesso!',
+      info: null,
+    });
+  }
+}
+
+async function editUser() {
+  try {
+    store.dispatch('loadingInit');
+    const req = await Reqs.editContact(
+      props.user[0].id,
+      userData.value.name,
+      userData.value.email,
+      userData.value.number
+    );
+
+    if (req.success) {
+      emitCancel();
+      store.dispatch('dialogAlert', {
+        open: true,
+        success: true,
+        message: 'Usuário editado',
+        info: `O Usuário <b>${req.data.name}</b> foi editado com sucesso!`,
+      });
+      emits('done');
+    } else {
+      error.value = req.error;
+    }
+  } catch (e) {
+    console.log(e);
+  } finally {
+    store.dispatch('loadingDoneMethod');
+  }
 }
 </script>

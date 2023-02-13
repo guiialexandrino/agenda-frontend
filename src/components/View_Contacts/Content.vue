@@ -58,7 +58,7 @@
 
     <!-- Dialogs -->
     <Dialog v-if="dialogAddEdit" @close="dialogAddEdit = false">
-      <AddEditUser :tipo="addOrEdit" :user="selectedContacts" />
+      <AddEditUser :tipo="addOrEdit" :user="selectedContacts" @done="refresh" />
     </Dialog>
 
     <Dialog v-if="dialogDelete" @close="dialogDelete = false">
@@ -107,6 +107,11 @@ async function loadContacts() {
   } finally {
     store.dispatch('loadingDoneMethod');
   }
+}
+
+async function refresh() {
+  selectedContacts.value = [];
+  await loadContacts();
 }
 
 function handleSelectUser(item) {
