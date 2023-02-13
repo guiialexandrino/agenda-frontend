@@ -18,7 +18,8 @@
     <div class="footerDialog">
       <Button
         :outlined="true"
-        outlinedHoverFillColor="var(--user-color)"
+        backgroundColor="var(--primary-color)"
+        outlinedHoverFillColor="var(--primary-color)"
         textHoverColor="white"
         @click="emitCancel()"
         >Ok, entendi!</Button
