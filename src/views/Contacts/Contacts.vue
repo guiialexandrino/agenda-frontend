@@ -42,7 +42,9 @@
             <Content />
           </div>
         </div>
-        <div ref="welcome" class="contacts-msg"><h1>Olá, Fulana</h1></div>
+        <div ref="welcome" class="contacts-msg">
+          <h1>Olá, {{ userName }}</h1>
+        </div>
       </div>
 
       <!-- Show Profile Picture for All Screens -->
@@ -74,6 +76,7 @@ import { useRouter } from 'vue-router';
 import Content from '../../components/View_Contacts/Content.vue';
 import Menu from '../../components/View_Contacts/Menu/Menu.vue';
 import ChangePhoto from '../../components/View_Contacts/ChangePhoto/ChangePhoto.vue';
+import localforage from 'localforage';
 
 const router = useRouter();
 
@@ -82,8 +85,11 @@ const welcome = ref(null);
 const logo = ref(null);
 const backgroundThemeColor = ref(null);
 const dialogPhoto = ref(false);
+const userName = ref('');
 
-onMounted(() => {
+onMounted(async () => {
+  const user = await localforage.getItem('user');
+  userName.value = user.name;
   scroll.value.addEventListener('scroll', () => {
     const scrolled = scroll.value.scrollTop;
 

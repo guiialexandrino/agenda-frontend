@@ -68,39 +68,20 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onBeforeMount } from 'vue';
+import { useStore } from 'vuex';
 import Table from '../__Global/Table/Table.vue';
 import AddEditUser from './AddEditUser/AddEditUser.vue';
 import DeleteUser from './DeleteUser/DeleteUser.vue';
+import Reqs from '../../requisitions/loggedUser';
 
 const table = ref(null);
-const contacts = ref([
-  {
-    id: '1231',
-    name: 'Aristeu',
-    email: 'aristeu@gmail.com',
-    number: '489800923',
-    checked: false,
-  },
-  {
-    id: '12312313',
-    name: 'XYZ',
-    email: 'xyz@gmail.com',
-    number: '489800923',
-    checked: false,
-  },
-  {
-    id: '12312131dfs3',
-    name: 'XYZ',
-    email: 'xyz@gmail.com',
-    number: '489800923',
-    checked: false,
-  },
-]);
+const contacts = ref([]);
 const selectedContacts = ref([]);
 const addOrEdit = ref(null);
 const dialogAddEdit = ref(false);
 const dialogDelete = ref(false);
+const store = useStore();
 
 const headers = ref([
   { label: '', value: 'checked', width: '4%' },
@@ -108,6 +89,25 @@ const headers = ref([
   { label: 'E-mail', value: 'email', width: '32%', sort: true },
   { label: 'Número', value: 'number', width: '32%' },
 ]);
+
+onBeforeMount(async () => {
+  await loadContacts();
+});
+
+async function loadContacts() {
+  try {
+    store.dispatch('loadingInit');
+    let req = await Reqs.viewContacts();
+    req.data.forEach((contact) => {
+      contact.checked = false;
+    });
+    contacts.value = req.data;
+  } catch (e) {
+    console.log(e);
+  } finally {
+    store.dispatch('loadingDoneMethod');
+  }
+}
 
 function handleSelectUser(item) {
   const index = contacts.value.findIndex((contact) => contact.id === item.id);
