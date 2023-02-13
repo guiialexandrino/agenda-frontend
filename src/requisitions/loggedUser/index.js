@@ -69,4 +69,16 @@ export default {
 
     return req.data;
   },
+
+  async restoreAvatar() {
+    const path = `/api/restoreAvatar`;
+    let req = '';
+    try {
+      req = await http.put(path, null, await getHeaders());
+    } catch (e) {
+      return e.response.data;
+    }
+
+    return req.data;
+  },
 };

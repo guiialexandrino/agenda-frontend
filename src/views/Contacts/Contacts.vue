@@ -60,6 +60,20 @@
           <ph-user-focus :size="16" weight="bold" />
           Alterar Foto
         </Button>
+        <Button
+          id="restore-btn"
+          :circle="true"
+          backgroundColor="white"
+          backgroundHoverColor="var(--user-color)"
+          textColor="var(--user-color)"
+          textHoverColor="white"
+          :disabled="
+            userAvatar === `background-image: var(--image)` ? true : false
+          "
+          @click="handleRestorePhoto"
+        >
+          <ph-eraser :size="18" weight="bold" />
+        </Button>
         <div class="background-color"></div>
         <div :style="userAvatar" class="photo"></div>
       </div>
@@ -71,15 +85,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUpdate } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import localforage from 'localforage';
 import Content from '../../components/View_Contacts/Content.vue';
 import Menu from '../../components/View_Contacts/Menu/Menu.vue';
 import ChangePhoto from '../../components/View_Contacts/ChangePhoto/ChangePhoto.vue';
-import localforage from 'localforage';
 import { upload } from '../../requisitions/base/baseUrl.js';
+import Reqs from '../../requisitions/loggedUser';
 
 const router = useRouter();
+const store = useStore();
 
 const scroll = ref(null);
 const welcome = ref(null);
@@ -90,21 +107,13 @@ const userName = ref('');
 const userAvatar = ref('');
 
 onMounted(async () => {
-  uploadDone();
+  await uploadDone();
   scroll.value.addEventListener('scroll', () => {
     const scrolled = scroll.value.scrollTop;
 
     welcome.value.style.bottom = `-${scrolled}px`;
   });
 });
-
-async function uploadDone() {
-  const user = await localforage.getItem('user');
-  userName.value = user.name;
-  userAvatar.value = user.avatar
-    ? `background-image: url(${upload}/${user.avatar})`
-    : 'background-image: var(--image)';
-}
 
 function handleProfile() {
   console.log('alterar perfil');
@@ -135,12 +144,50 @@ function handleUserTheme(color) {
   backgroundThemeColor.value.classList.add(`${color.theme}Background`);
 }
 
-function handleLogout() {
+async function handleLogout() {
   router.push({ name: 'Home' });
+  window.document.documentElement.style.setProperty(
+    '--user-color',
+    'rgba(51, 41, 161, 1)'
+  );
+  window.document.documentElement.style.setProperty(
+    '--primary-color',
+    'rgba(51, 41, 161, 1)'
+  );
+  await localforage.removeItem('user');
 }
 
 function handleChangePhoto() {
   dialogPhoto.value = true;
+}
+
+async function uploadDone() {
+  const user = await localforage.getItem('user');
+  userName.value = user.name;
+  userAvatar.value = user.avatar
+    ? `background-image: url(${upload}/${user.avatar})`
+    : 'background-image: var(--image)';
+}
+
+async function handleRestorePhoto() {
+  store.dispatch('loadingInit');
+  try {
+    const req = await Reqs.restoreAvatar();
+    if (req.success) {
+      store.dispatch('dialogAlert', {
+        open: true,
+        success: true,
+        message: 'Foto default restaurada!',
+        info: `A foto padrão da aplicação foi restaurada!`,
+      });
+      await localforage.setItem('user', req.data);
+      await uploadDone();
+    }
+  } catch (e) {
+    console.log(e);
+  } finally {
+    store.dispatch('loadingDoneMethod');
+  }
 }
 </script>
 
