@@ -189,6 +189,7 @@ export default {
     searchInput: '',
     searchMode: false,
     searchResult: [],
+    canShowLoadingEffect: false, // impacta apenas no loading ao clicar checkbox
     mouseHoverSort: '',
     sortType: '',
   }),
@@ -209,13 +210,18 @@ export default {
   watch: {
     /*Observando o prop: data */
     data: {
-      handler() {
+      handler(actual, old) {
         this.copiedTable = [...this.data];
         this.changePage(this.actualPage);
         this.showNumberPages(this.showNumberOfPages);
         if (this.searchMode) this.search();
       },
       deep: true,
+    },
+
+    searchInput(actual, old) {
+      if (actual !== old) this.canShowLoadingEffect = true;
+      else this.canShowLoadingEffect = false;
     },
 
     /*Observando o numero da página, quando muda atualiza o que exibe na tela */
@@ -310,9 +316,12 @@ export default {
 
     /* Executa a procura dentro da array */
     search() {
-      this.$store.dispatch('loadingInit');
+      if (this.searchResult.length === 0 || this.canShowLoadingEffect)
+        this.$store.dispatch('loadingInit');
+
       this.simulate().then(() => {
         this.searchMode = true;
+        this.canShowLoadingEffect = false;
         const ignore = this.headers.map((item) => item.value);
 
         if (
