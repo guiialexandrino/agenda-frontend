@@ -3,7 +3,12 @@
     <h1 class="__verticalTop">Recuperar senha</h1>
     <div v-if="!correctToken">
       <p>Digite o Token que foi enviado ao seu e-mail:</p>
-      <InputComponent label="Token" v-model="token" />
+      <InputComponent
+        label="Token"
+        v-model="token"
+        validation="onlyNumbers"
+        maxlength="6"
+      />
       <div class="__alignRight">
         <Button @click="validateToken">Checar</Button>
       </div>

@@ -14,7 +14,12 @@
     <div class="contentDialog __dialogOverflow">
       <InputComponent label="Nome" v-model="userData.name" />
       <InputComponent label="E-mail" v-model="userData.email" />
-      <InputComponent label="Número" v-model="userData.number" />
+      <InputComponent
+        label="Número"
+        v-model="userData.number"
+        validation="onlyNumbers"
+        mask="phone"
+      />
     </div>
   </div>
 
