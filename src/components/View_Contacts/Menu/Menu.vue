@@ -4,6 +4,7 @@
       :circle="true"
       backgroundColor="transparent"
       :textColor="color"
+      :removeFocus="false"
       @click="handleMenu"
     >
       <ph-list :size="20" weight="bold" />

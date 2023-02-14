@@ -16,7 +16,9 @@
 
       <!-- Content for SmallScreen  -->
       <div class="smallDevicesContent">
-        <div class="contacts-msg-small"><h1>Olá, Fulana</h1></div>
+        <div class="contacts-msg-small">
+          <h1>Olá, {{ userName }}</h1>
+        </div>
         <Content />
       </div>
 
@@ -170,7 +172,7 @@ function handleChangePhoto() {
 
 async function uploadDone() {
   const user = await localforage.getItem('user');
-  userName.value = user.name;
+  userName.value = user.name.split(' ')[0];
   userAvatar.value = user.avatar
     ? `background-image: url(${upload}/${user.avatar})`
     : 'background-image: var(--image)';

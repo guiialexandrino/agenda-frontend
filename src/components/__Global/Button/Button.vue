@@ -27,6 +27,7 @@ textColor -> cor padrão do botão
 textHovercolor -> cor do texto ao passar o mouse;
 circle -> cria botão circulo
 disabled -> botão desabilitado
+removeFocus -> removeFocus do botão apos clicar
 
  */
 
@@ -47,6 +48,7 @@ const props = defineProps({
   textHoverColor: { type: String },
   circle: { type: Boolean },
   disabled: { type: Boolean },
+  removeFocus: { type: Boolean, default: true },
 });
 
 const btn = ref(null);
@@ -120,7 +122,7 @@ function checkHover() {
 }
 
 function removeFocus() {
-  btn.value.blur();
+  if (props.removeFocus) btn.value.blur();
 }
 </script>
 
