@@ -124,13 +124,22 @@ onMounted(async () => {
 
     welcome.value.style.bottom = `-${scrolled}px`;
   });
+
+  //check has User Theme
+  const theme = await localforage.getItem('theme');
+  if (theme) {
+    await handleUserTheme(theme);
+  }
 });
 
 function handleProfile() {
   dialogProfile.value = true;
 }
 
-function handleUserTheme(color) {
+async function handleUserTheme(color) {
+  const themeInfo = { ...color };
+  await localforage.setItem('theme', themeInfo); // save -> localforage
+
   window.document.documentElement.style.setProperty(
     '--user-color',
     color.color

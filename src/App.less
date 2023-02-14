@@ -7,6 +7,15 @@
   --background-small-devices: url('./assets/images/Background.png');
 }
 
+/*Hack to load all images*/
+html {
+  background-image: url(./assets/images/Networking1.jpg),
+    url(./assets/images/Background.png), url(./assets/images/Background2.png),
+    url(./assets/images/Logo_branco.png), url(./assets/images/Logo.png),
+    url(./assets/images/Logo2.png);
+  background-size: 0;
+}
+
 @font-face {
   font-family: 'montserrat-medium';
   src: url('./assets/fonts/Montserrat-Medium.ttf');
