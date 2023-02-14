@@ -81,4 +81,16 @@ export default {
 
     return req.data;
   },
+
+  async editProfile(data) {
+    const path = `/api/editProfile`;
+    let req = '';
+    try {
+      req = await http.put(path, { ...data }, await getHeaders());
+    } catch (e) {
+      return e.response.data;
+    }
+
+    return req.data;
+  },
 };

@@ -78,8 +78,13 @@
         <div :style="userAvatar" class="photo"></div>
       </div>
     </div>
+
     <Dialog v-if="dialogPhoto" @close="dialogPhoto = false" width="800px">
       <ChangePhoto @done="uploadDone" />
+    </Dialog>
+
+    <Dialog v-if="dialogProfile" @close="dialogProfile = false">
+      <EditProfile @done="uploadDone" />
     </Dialog>
   </section>
 </template>
@@ -91,6 +96,7 @@ import { useStore } from 'vuex';
 import localforage from 'localforage';
 import Content from '../../components/View_Contacts/Content.vue';
 import Menu from '../../components/View_Contacts/Menu/Menu.vue';
+import EditProfile from '../../components/View_Contacts/EditProfile/EditProfile.vue';
 import ChangePhoto from '../../components/View_Contacts/ChangePhoto/ChangePhoto.vue';
 import { upload } from '../../requisitions/base/baseUrl.js';
 import Reqs from '../../requisitions/loggedUser';
@@ -103,6 +109,7 @@ const welcome = ref(null);
 const logo = ref(null);
 const backgroundThemeColor = ref(null);
 const dialogPhoto = ref(false);
+const dialogProfile = ref(false);
 const userName = ref('');
 const userAvatar = ref('');
 
@@ -116,7 +123,7 @@ onMounted(async () => {
 });
 
 function handleProfile() {
-  console.log('alterar perfil');
+  dialogProfile.value = true;
 }
 
 function handleUserTheme(color) {
