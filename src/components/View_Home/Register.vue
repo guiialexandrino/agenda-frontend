@@ -23,6 +23,8 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import Reqs from '../../requisitions/beforeLogin/';
 
+document.title = 'App Agenda | Registrar';
+
 const form = ref({ name: '', email: '', password: '', password2: '' });
 const store = useStore();
 const router = useRouter();

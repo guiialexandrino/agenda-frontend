@@ -115,6 +115,8 @@ const dialogProfile = ref(false);
 const userName = ref('');
 const userAvatar = ref('');
 
+document.title = 'App Agenda | Seus contatos';
+
 onMounted(async () => {
   await uploadDone();
   scroll.value.addEventListener('scroll', () => {

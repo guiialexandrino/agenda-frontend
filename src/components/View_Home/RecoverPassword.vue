@@ -37,6 +37,8 @@ import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import Reqs from '../../requisitions/beforeLogin';
 
+document.title = 'App Agenda | Recuperar Senha';
+
 const store = useStore();
 const route = useRoute();
 const router = useRouter();

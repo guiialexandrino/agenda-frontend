@@ -31,6 +31,8 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import Reqs from '../../requisitions/beforeLogin/';
 
+document.title = 'App Agenda';
+
 const router = useRouter();
 const store = useStore();
 

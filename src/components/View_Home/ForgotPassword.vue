@@ -14,6 +14,8 @@ import { ref } from 'vue';
 import { useStore } from 'vuex';
 import Reqs from '../../requisitions/beforeLogin';
 
+document.title = 'App Agenda | Esqueceu a senha';
+
 const store = useStore();
 const email = ref('');
 
