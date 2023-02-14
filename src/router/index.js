@@ -23,6 +23,12 @@ const router = createRouter({
           name: 'Forgot Password',
           component: () => import('../components/View_Home/ForgotPassword.vue'),
         },
+        {
+          path: 'recoverPassword/:id',
+          name: 'Recover Password',
+          component: () =>
+            import('../components/View_Home/RecoverPassword.vue'),
+        },
       ],
       redirect: { name: 'Login' },
     },
