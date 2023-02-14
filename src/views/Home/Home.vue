@@ -35,6 +35,7 @@ watch(actualRoute, (page, previousPage) => {
   if (page === 'Login') label.value = 'Registre-se!';
   if (page === 'Register') label.value = 'Login';
   if (page === 'Forgot Password') label.value = 'Login';
+  if (page === 'Recovery') label.value = 'Login';
   if (page === 'Register' || previousPage === 'Register')
     translateXEffect(route.name);
 });
@@ -43,6 +44,7 @@ function handleClick() {
   if (route.name === 'Login') router.push({ name: 'Register' });
   if (route.name === 'Register') router.push({ name: 'Login' });
   if (route.name === 'Forgot Password') router.push({ name: 'Login' });
+  if (route.name === 'Recovery') router.push({ name: 'Login' });
 }
 
 /*Referente a animação */

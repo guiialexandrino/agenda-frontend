@@ -37,12 +37,12 @@ export default {
     return req.data;
   },
 
-  async lostPassword(data) {
+  async lostPassword(email) {
     const path = '/enter/lostPassword';
     let req = '';
     try {
       req = await http.post(path, {
-        email: data.email,
+        email: email,
       });
     } catch (e) {
       return e.response.data;

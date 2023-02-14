@@ -24,8 +24,8 @@ const router = createRouter({
           component: () => import('../components/View_Home/ForgotPassword.vue'),
         },
         {
-          path: 'recoverPassword/:id',
-          name: 'Recover Password',
+          path: 'recovery/:id',
+          name: 'Recovery',
           component: () =>
             import('../components/View_Home/RecoverPassword.vue'),
         },
