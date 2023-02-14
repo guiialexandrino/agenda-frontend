@@ -2,6 +2,18 @@ import http from '../base/baseUrl.js';
 import getHeaders from '../base/getHeader';
 
 export default {
+  async verifyAuthToken() {
+    const path = '/api/verifyAuthToken';
+    let req = '';
+    try {
+      req = await http.get(path, await getHeaders());
+    } catch (e) {
+      return e;
+    }
+
+    return req.data;
+  },
+
   async viewContacts() {
     const path = '/api/viewContacts';
     let req = '';

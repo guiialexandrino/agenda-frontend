@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import localforage from 'localforage';
+import Reqs from '../requisitions/loggedUser/';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +55,36 @@ const router = createRouter({
       redirect: { name: 'Contacts' },
     },
   ],
+});
+
+router.beforeEach(async (to, from, next) => {
+  let user = await localforage.getItem('user');
+
+  if (user) {
+    try {
+      const req = await Reqs.verifyAuthToken();
+      req.success ? (user.authConfirm = true) : (user.authConfirm = false);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  if (user?.authConfirm && to.matched[0].path === '/') {
+    /*Se tiver token de autenticação válido e estiver indo
+    para uma rota que não precisa de login, será jogado pa-
+    ra a tela principal da conta. Ou seja, não permite fa-
+    zer login, registrar, esquecer a senha caso tenha auth
+    Token válido no localforage. Necessita fazer logout.*/
+
+    next({ name: 'User' });
+  } else if (!user?.authConfirm && to.matched[0].path !== '/') {
+    /*Caso não tenha token de autenticação valido e tentar ir para
+    uma rota que necessita de autenticação, será redirecionado pa-
+    ra a tela de login.*/
+    next({ name: 'Login' });
+  } else {
+    next();
+  }
 });
 
 export default router;
