@@ -1,11 +1,13 @@
 <template>
   <div class="__inputBox" :style="width ? `width: ${width}` : ``">
     <input
+      ref="inputComponent"
       :type="type"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       @keypress="checkKeyPress"
-      @keydown="checkKeyUp"
+      @keydown="checkKeyDown"
+      @keyup.enter="removeFocus"
       :maxlength="maxlength"
       required
     />
@@ -15,6 +17,8 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
 const props = defineProps({
   label: { type: String, default: 'Default' },
   modelValue: { type: [String, Number] },
@@ -25,13 +29,15 @@ const props = defineProps({
   maxlength: { type: String },
 });
 
+const inputComponent = ref(null);
+
 /* Methods */
 
 function checkKeyPress(event) {
   props.validation === 'onlyNumbers' && checkNumber(event);
 }
 
-function checkKeyUp(event) {
+function checkKeyDown(event) {
   props.mask === 'phone' && phoneNumber(event);
 }
 
@@ -49,6 +55,10 @@ function phoneNumber(event) {
     event.target.value = `+${event.target.value}`;
 
   if (field.length === 3 && event.keyCode !== 8) event.target.value += ' ';
+}
+
+function removeFocus() {
+  inputComponent.value.blur();
 }
 </script>
 

@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="search-table">
-      <InputComponent label="Buscar" width="300px" v-model="searchInput" />
+      <InputComponent
+        label="Buscar"
+        width="300px"
+        v-model="searchInput"
+        @keyup.enter="search"
+      />
       <Button
         :circle="true"
         backgroundColor="transparent"

@@ -4,7 +4,12 @@
     <p>Realize o login para acessar os seus contatos.</p>
 
     <InputComponent label="E-mail" v-model="form.email" />
-    <InputComponent label="Senha" v-model="form.password" type="password" />
+    <InputComponent
+      label="Senha"
+      v-model="form.password"
+      type="password"
+      @keyup.enter="handleLogin"
+    />
 
     <div class="forgotPassword">
       <a @click="handleForgotPassword">Esqueceu a senha?</a>

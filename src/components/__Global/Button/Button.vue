@@ -4,6 +4,7 @@
       ref="btn"
       @mouseenter="checkHover"
       @mouseleave="checkProps"
+      @click="removeFocus"
       :disabled="disabled"
     >
       <slot>Botão</slot>
@@ -116,6 +117,10 @@ function checkHover() {
       ? props.backgroundHoverColor
       : props.backgroundColor;
   }
+}
+
+function removeFocus() {
+  btn.value.blur();
 }
 </script>
 
