@@ -150,14 +150,18 @@ async function handleUserTheme(color) {
   );
   window.document.documentElement.style.setProperty(
     '--background-small-devices',
-    `url('../src/assets/images/${color.background}')`
+    `url('/src/assets/images/${color.background}')`
   );
 
   //Remove antes
   logo.value.classList.remove('defaultTheme');
   logo.value.classList.remove('redTheme');
+  logo.value.classList.remove('greenTheme');
+  logo.value.classList.remove('pinkTheme');
   backgroundThemeColor.value.classList.remove('defaultThemeBackground');
   backgroundThemeColor.value.classList.remove('redThemeBackground');
+  backgroundThemeColor.value.classList.remove('greenThemeBackground');
+  backgroundThemeColor.value.classList.remove('pinkThemeBackground');
 
   //Altera cor do logo e fundo
   logo.value.classList.add(color.theme);

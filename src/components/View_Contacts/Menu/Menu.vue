@@ -51,6 +51,16 @@ const colorThemes = ref([
     color: 'rgba(210,77,92,1)',
     background: 'Background2.png',
   },
+  {
+    theme: 'greenTheme',
+    color: 'rgba(31,126,112,1)',
+    background: 'Background3.png',
+  },
+  {
+    theme: 'pinkTheme',
+    color: 'rgba(216,33,216,1)',
+    background: 'Background4.png',
+  },
 ]);
 
 function handleMenu() {

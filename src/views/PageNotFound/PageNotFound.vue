@@ -47,6 +47,8 @@ async function handleUserTheme(color) {
 
   backgroundThemeColor.value.classList.remove('defaultThemeBackground');
   backgroundThemeColor.value.classList.remove('redThemeBackground');
+  backgroundThemeColor.value.classList.remove('greenThemeBackground');
+  backgroundThemeColor.value.classList.remove('pinkThemeBackground');
 
   //Altera cor do logo e fundo
   backgroundThemeColor.value.classList.add(`${color.theme}Background`);
