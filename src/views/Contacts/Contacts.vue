@@ -16,7 +16,10 @@
 
       <!-- Content for SmallScreen  -->
       <div class="smallDevicesContent">
-        <div class="backgroundSmallDevices"></div>
+        <div
+          ref="backgroundSmallThemeColor"
+          class="backgroundSmallDevices"
+        ></div>
         <div class="contacts-msg-small">
           <h1>Olá, {{ userName }}</h1>
         </div>
@@ -111,6 +114,7 @@ const scroll = ref(null);
 const welcome = ref(null);
 const logo = ref(null);
 const backgroundThemeColor = ref(null);
+const backgroundSmallThemeColor = ref(null);
 const dialogPhoto = ref(false);
 const dialogProfile = ref(false);
 const userName = ref('');
@@ -166,24 +170,19 @@ async function handleUserTheme(color) {
     '--primary-color',
     color.color
   );
-  window.document.documentElement.style.setProperty(
-    '--background-small-devices',
-    `url('/src/assets/images/${color.background}')`
-  );
 
   //Remove antes
-  logo.value.classList.remove('defaultTheme');
-  logo.value.classList.remove('redTheme');
-  logo.value.classList.remove('greenTheme');
-  logo.value.classList.remove('pinkTheme');
-  backgroundThemeColor.value.classList.remove('defaultThemeBackground');
-  backgroundThemeColor.value.classList.remove('redThemeBackground');
-  backgroundThemeColor.value.classList.remove('greenThemeBackground');
-  backgroundThemeColor.value.classList.remove('pinkThemeBackground');
+  const themes = ['defaultTheme', 'redTheme', 'greenTheme', 'pinkTheme'];
+  themes.forEach((theme) => {
+    logo.value.classList.remove(theme);
+    backgroundThemeColor.value.classList.remove(`${theme}Background`);
+    backgroundSmallThemeColor.value.classList.remove(`${theme}Background`);
+  });
 
   //Altera cor do logo e fundo
   logo.value.classList.add(color.theme);
   backgroundThemeColor.value.classList.add(`${color.theme}Background`);
+  backgroundSmallThemeColor.value.classList.add(`${color.theme}Background`);
 }
 
 async function handleLogout() {
