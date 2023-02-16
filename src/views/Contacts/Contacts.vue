@@ -76,7 +76,7 @@
           :disabled="
             userAvatar === `background-image: var(--image)` ? true : false
           "
-          @click="handleRestorePhoto"
+          @click="askWannaRestorePhoto"
         >
           <ph-eraser :size="18" weight="bold" />
         </Button>
@@ -86,11 +86,15 @@
     </div>
 
     <Dialog v-if="dialogPhoto" @close="dialogPhoto = false" width="800px">
-      <ChangePhoto @done="uploadDone" />
+      <ChangePhoto @done="loadInfoUser" />
     </Dialog>
 
     <Dialog v-if="dialogProfile" @close="dialogProfile = false">
-      <EditProfile @done="uploadDone" />
+      <EditProfile @done="loadInfoUser" />
+    </Dialog>
+
+    <Dialog v-if="dialogRestorePhoto" @close="dialogRestorePhoto = false">
+      <RestorePhoto @done="loadInfoUser" />
     </Dialog>
   </section>
 </template>
@@ -104,8 +108,8 @@ import Content from '../../components/View_Contacts/Content.vue';
 import Menu from '../../components/View_Contacts/Menu/Menu.vue';
 import EditProfile from '../../components/View_Contacts/EditProfile/EditProfile.vue';
 import ChangePhoto from '../../components/View_Contacts/ChangePhoto/ChangePhoto.vue';
+import RestorePhoto from '../../components/View_Contacts/RestorePhoto/RestorePhoto.vue';
 import { upload } from '../../requisitions/base/baseUrl.js';
-import Reqs from '../../requisitions/loggedUser';
 
 const router = useRouter();
 const store = useStore();
@@ -117,13 +121,14 @@ const backgroundThemeColor = ref(null);
 const backgroundSmallThemeColor = ref(null);
 const dialogPhoto = ref(false);
 const dialogProfile = ref(false);
+const dialogRestorePhoto = ref(false);
 const userName = ref('');
 const userAvatar = ref('');
 
 document.title = 'App Agenda | Seus contatos';
 
 onMounted(async () => {
-  await uploadDone();
+  await loadInfoUser();
   scroll.value.addEventListener('scroll', () => {
     const scrolled = scroll.value.scrollTop;
 
@@ -144,6 +149,22 @@ onMounted(async () => {
 
 function handleProfile() {
   dialogProfile.value = true;
+}
+
+function handleChangePhoto() {
+  dialogPhoto.value = true;
+}
+
+function askWannaRestorePhoto() {
+  dialogRestorePhoto.value = true;
+}
+
+async function loadInfoUser() {
+  const user = await localforage.getItem('user');
+  userName.value = user.name.split(' ')[0];
+  userAvatar.value = user.avatar
+    ? `background-image: url(${upload}/${user.avatar})`
+    : 'background-image: var(--image)';
 }
 
 async function handleUserTheme(color) {
@@ -196,39 +217,6 @@ async function handleLogout() {
     'rgba(51, 41, 161, 1)'
   );
   await localforage.removeItem('user');
-}
-
-function handleChangePhoto() {
-  dialogPhoto.value = true;
-}
-
-async function uploadDone() {
-  const user = await localforage.getItem('user');
-  userName.value = user.name.split(' ')[0];
-  userAvatar.value = user.avatar
-    ? `background-image: url(${upload}/${user.avatar})`
-    : 'background-image: var(--image)';
-}
-
-async function handleRestorePhoto() {
-  store.dispatch('loadingInit');
-  try {
-    const req = await Reqs.restoreAvatar();
-    if (req.success) {
-      store.dispatch('dialogAlert', {
-        open: true,
-        success: true,
-        message: 'Foto default restaurada!',
-        info: `A foto padrão da aplicação foi restaurada!`,
-      });
-      await localforage.setItem('user', req.data);
-      await uploadDone();
-    }
-  } catch (e) {
-    console.log(e);
-  } finally {
-    store.dispatch('loadingDoneMethod');
-  }
 }
 </script>
 
