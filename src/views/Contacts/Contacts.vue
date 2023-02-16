@@ -125,10 +125,15 @@ onMounted(async () => {
     welcome.value.style.bottom = `-${scrolled}px`;
   });
 
-  //check has User Theme
-  const theme = await localforage.getItem('theme');
-  if (theme) {
-    await handleUserTheme(theme);
+  //check User Theme
+  const user = await localforage.getItem('user');
+  const loadTheme = await localforage.getItem('theme');
+
+  if (loadTheme) {
+    const resultForUser = loadTheme.find((users) => {
+      return users.user === user.id;
+    });
+    if (resultForUser) await handleUserTheme(resultForUser);
   }
 });
 
@@ -138,7 +143,19 @@ function handleProfile() {
 
 async function handleUserTheme(color) {
   const themeInfo = { ...color };
-  await localforage.setItem('theme', themeInfo); // save -> localforage
+  const user = await localforage.getItem('user'); // carrega usuario
+  const loadTheme = await localforage.getItem('theme'); // tenta carregar
+
+  if (!loadTheme) {
+    const theme = [{ user: user.id, ...themeInfo }];
+    await localforage.setItem('theme', theme); // save -> localforage
+  } else {
+    const results = loadTheme.filter((users) => {
+      return users.user !== user.id;
+    });
+    results.push({ user: user.id, ...themeInfo });
+    await localforage.setItem('theme', results);
+  }
 
   window.document.documentElement.style.setProperty(
     '--user-color',

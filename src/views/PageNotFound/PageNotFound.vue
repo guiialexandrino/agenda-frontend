@@ -26,10 +26,15 @@ const router = useRouter();
 const backgroundThemeColor = ref(null);
 
 onMounted(async () => {
-  //check has User Theme
-  const theme = await localforage.getItem('theme');
-  if (theme) {
-    await handleUserTheme(theme);
+  //check User Theme
+  const user = await localforage.getItem('user');
+  const loadTheme = await localforage.getItem('theme');
+
+  if (loadTheme) {
+    const resultForUser = loadTheme.find((users) => {
+      return users.user === user.id;
+    });
+    if (resultForUser) await handleUserTheme(resultForUser);
   }
 });
 
