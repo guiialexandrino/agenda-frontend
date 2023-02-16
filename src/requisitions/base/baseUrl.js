@@ -11,4 +11,11 @@ const baseUrl = axios.create({ baseURL: url });
 // export const upload = `connect/uploads`;
 // const baseUrl = axios.create({ baseURL: "connect" });
 
+/* Change the file: Contacts.vue, in the line: 
+url('/src/assets/images/${color.background}')
+
+to:
+url('/assets/images/${color.background}')
+*/
+
 export default baseUrl;
