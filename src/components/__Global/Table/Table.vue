@@ -294,15 +294,18 @@ export default {
 
     /*Muda a página e exibe o novo resultado na tela referente a página especifica */
     changePage(pageNumber) {
-      if (typeof pageNumber === 'number' && !this.searchMode) {
-        this.actualPage = pageNumber;
-        this.copiedTable = this.showItensPerPage(this.data);
-      }
+      this.$store.dispatch('loadingInit');
+      this.simulate().then(() => {
+        if (typeof pageNumber === 'number' && !this.searchMode) {
+          this.actualPage = pageNumber;
+          this.copiedTable = this.showItensPerPage(this.data);
+        }
 
-      if (typeof pageNumber === 'number' && this.searchMode) {
-        this.actualPage = pageNumber;
-        this.copiedTable = this.showItensPerPage(this.searchResult);
-      }
+        if (typeof pageNumber === 'number' && this.searchMode) {
+          this.actualPage = pageNumber;
+          this.copiedTable = this.showItensPerPage(this.searchResult);
+        }
+      });
     },
 
     backward() {
