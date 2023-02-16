@@ -16,6 +16,7 @@
 
       <!-- Content for SmallScreen  -->
       <div class="smallDevicesContent">
+        <div class="backgroundSmallDevices"></div>
         <div class="contacts-msg-small">
           <h1>Olá, {{ userName }}</h1>
         </div>
