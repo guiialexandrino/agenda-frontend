@@ -315,31 +315,25 @@ export default {
 
     /*Muda a página e exibe o novo resultado na tela referente a página especifica */
     changePage(pageNumber) {
-      if (this.canShowLoadingEffect) this.$store.dispatch('loadingInit');
-      this.simulate().then(() => {
-        this.canShowLoadingEffect = false;
-        if (typeof pageNumber === 'number' && !this.searchMode) {
-          this.actualPage = pageNumber;
-          this.copiedTable = this.showItensPerPage(this.data);
-        }
+      if (typeof pageNumber === 'number' && !this.searchMode) {
+        this.actualPage = pageNumber;
+        this.copiedTable = this.showItensPerPage(this.data);
+      }
 
-        if (typeof pageNumber === 'number' && this.searchMode) {
-          this.actualPage = pageNumber;
-          this.copiedTable = this.showItensPerPage(this.searchResult);
-        }
-      });
+      if (typeof pageNumber === 'number' && this.searchMode) {
+        this.actualPage = pageNumber;
+        this.copiedTable = this.showItensPerPage(this.searchResult);
+      }
     },
 
     backward() {
       // let page = this.actualPage - this.maxPagesPagination;
-      this.canShowLoadingEffect = true;
       let page = this.pagesLabelNav[0] - this.maxPagesPagination;
       if (page <= 0) page = 1;
       page > 0 && this.changePage(page);
     },
 
     forward() {
-      this.canShowLoadingEffect = true;
       let page = this.pagesLabelNav[this.pagesLabelNav.length - 1] + 1;
       if (page > this.numberOfPages)
         page = this.pagesLabelNav[this.pagesLabelNav.length - 1];
