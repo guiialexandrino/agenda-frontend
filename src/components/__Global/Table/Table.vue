@@ -1,5 +1,5 @@
 <template>
-  <div class="fixMobileBackground">
+  <div ref="fixMobileBackground">
     <div class="search-table">
       <InputComponent
         label="Buscar"
@@ -212,6 +212,10 @@ export default {
     this.showNumberPages(this.showNumberOfPages);
   },
 
+  mounted() {
+    this.checkDevice();
+  },
+
   watch: {
     /*Observando o prop: data */
     data: {
@@ -245,6 +249,23 @@ export default {
   },
 
   methods: {
+    /*Checa o device do usuário */
+    checkDevice() {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        console.log('está acessando via celular');
+        console.log(this.$refs.fixMobileBackground);
+        this.$refs.fixMobileBackground.classList.add('addWhite');
+      }
+    },
+
     /* Retorna uma array de acordo com o maximo de resultados por página */
     showItensPerPage(items) {
       let content = [];
