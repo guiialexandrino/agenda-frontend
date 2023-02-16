@@ -144,6 +144,12 @@ onMounted(async () => {
       return users.user === user.id;
     });
     if (resultForUser) await handleUserTheme(resultForUser);
+  } else {
+    await handleUserTheme({
+      theme: 'defaultTheme',
+      color: 'rgba(51, 41, 161, 1)',
+      background: 'Background.png',
+    });
   }
 });
 
