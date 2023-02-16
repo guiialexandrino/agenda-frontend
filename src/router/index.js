@@ -60,6 +60,9 @@ const router = createRouter({
       component: () => import('../views/PageNotFound/PageNotFound.vue'),
     },
   ],
+  scrollBehavior() {
+    return window.scrollTo({ top: 0, behavior: 'smooth' });
+  },
 });
 
 router.beforeEach(async (to, from, next) => {
