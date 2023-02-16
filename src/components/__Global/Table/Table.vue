@@ -315,6 +315,7 @@ export default {
 
     /*Muda a página e exibe o novo resultado na tela referente a página especifica */
     changePage(pageNumber) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       if (typeof pageNumber === 'number' && !this.searchMode) {
         this.actualPage = pageNumber;
         this.copiedTable = this.showItensPerPage(this.data);
