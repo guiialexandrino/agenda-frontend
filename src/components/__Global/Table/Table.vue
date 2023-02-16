@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fixMobileBackground">
     <div class="search-table">
       <InputComponent
         label="Buscar"

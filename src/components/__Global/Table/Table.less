@@ -56,7 +56,7 @@ td {
   // justify-content: center;
   font-size: 1.1rem;
   margin-top: 2.2rem;
-  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
   user-select: none;
   text-align: center;
 }
@@ -89,14 +89,20 @@ td {
 }
 
 @media (max-width: 800px) {
+  .fixMobileBackground {
+    background-color: white !important;
+  }
+
   .hideInMobile {
     display: none;
   }
+
   .table-mobile-breakpoint {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    z-index: 1000;
   }
 
   .mobile-card {
@@ -116,6 +122,6 @@ td {
   }
 
   .search-table {
-    margin-top: 30px;
+    margin-top: 60px;
   }
 }

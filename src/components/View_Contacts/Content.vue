@@ -1,5 +1,5 @@
 <template>
-  <div style="padding-bottom: 30px">
+  <div style="padding-bottom: 0px">
     <Table
       :headers="headers"
       :data="contacts"
