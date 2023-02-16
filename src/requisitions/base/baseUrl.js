@@ -9,6 +9,6 @@ const baseUrl = axios.create({ baseURL: url });
 /* For Netlify Build -> Comment the lines above! */
 
 // export const upload = `connect/uploads`;
-// const baseUrl = axios.create({ baseURL: "connect" });
+// const baseUrl = axios.create({ baseURL: 'connect' });
 
 export default baseUrl;
