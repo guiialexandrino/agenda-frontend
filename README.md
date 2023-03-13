@@ -1,7 +1,9 @@
 # agenda-front
 
 Project using Vue3.
+
 Live preview: https://agenda-app-dev.netlify.app/
+
 Node Version: 18
 
 ## Recommended IDE Setup
