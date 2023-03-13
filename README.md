@@ -1,6 +1,8 @@
 # agenda-front
 
-This template should help get you started developing with Vue 3 in Vite.
+Project using Vue3.
+Live preview: https://agenda-app-dev.netlify.app/
+Node Version: 18
 
 ## Recommended IDE Setup
 
